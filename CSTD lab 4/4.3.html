@@ -7,12 +7,13 @@
 <body>
 
     <script>
-        var arr = [10.2,20,34,333.12345]
+        var arr = [10,20,34,33312345]
         var longest = 0;
         for (var i = 0; i < arr.length; i++) {
         var strLength = `${arr[i]}`.length; 
         if (strLength > longest) {
             longest = strLength; 
+            console.log(longest);
         }
     }
 
