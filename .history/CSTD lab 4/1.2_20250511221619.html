@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var sum = 0;
+        var value = 0;
+
+        while (true) {
+            value = prompt("Enter a number (enter 0 to stop or if sum exceeds 100):");
+
+            if (Number(value) || value == "") 
+            {
+                alert("Please enter a valid number.");
+                continue;
+                
+            }
+
+            value = parseInt(value);
+
+            if (sum + value > 100) 
+            {
+                break;
+            }
+            sum += value;
+        }
+
+        alert("Total sum of entered values: " + sum);
+    </script>
+</body>
+</html>

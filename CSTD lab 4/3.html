@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var imageName = prompt("Enter the image name");
+        var fontColor = prompt("Enter the font color");
+
+        if (imageName && fontColor) {
+            document.write("<p style='color: " + fontColor + ";'>This is ur image</p>");
+            document.write("<img src='" + imageName + "' style='border: 5px solid " + fontColor + "'><br>");
+            
+        } else {
+            alert("Please enter both an image name and a font color.");
+        }
+    </script>
+</body>
+</html>

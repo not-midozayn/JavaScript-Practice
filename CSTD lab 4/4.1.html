@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var number = prompt("Enter the number:");
+        var _1stRadix = prompt("Enter the initial radix");
+        var targetRadix = prompt("Enter the target radix");
+
+        var decimalNumber = parseInt(number, _1stRadix);
+
+        var targetNumber = decimalNumber.toString(targetRadix);
+
+        alert("The result is: " + targetNumber);
+    </script>
+</body>
+</html>

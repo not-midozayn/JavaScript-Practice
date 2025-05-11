@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>2</title>
+</head>
+<body>
+    <script>
+        var arr1 = [0,0,0];
+        for (i=0;i<arr1.length;i++)
+        {
+            arr1[i] = Number(prompt(`enter value number ${i+1}` ));
+        }
+
+        document.write("<h1>"+ "Adding -- Multiplying -- and Dividing 3 values" + "</h1>");
+        var sum = 0;
+        var multiply = 1;
+        var division = arr1[0];
+        for (i=0;i<arr1.length;i++)
+        {
+            sum += arr1[i];
+        }
+        for (i=0;i<arr1.length;i++)
+        {
+            multiply *= arr1[i];
+        }
+        for (i=1;i<arr1.length;i++)
+        {
+            division /= arr1[i];
+        }
+        document.write("<h2 style='color:red';>" +"The sum of the values"+ arr1[0] +"+"+ arr1[1] + "+" + arr1[2] +"="+ sum + "</h2>");
+        document.write("<h2 style='color:red'>" +"The multiplication of the values"+ arr1[0] + "*"+ arr1[1] + "*"+ arr1[2] +"="+ multiply + "</h2>");
+        document.write("<h2 style='color:red'>" +"The division of the values"+ arr1[0] + "/"+ arr1[1] +"/"+ arr1[2] +"="+ division + "</h2>");
+        
+
+
+
+
+    </script>
+    
+</body>
+</html>
