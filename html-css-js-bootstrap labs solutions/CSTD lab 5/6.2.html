@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>6.2</title>
+</head>
+
+<body>
+    <script>
+        function printArray(x) 
+        {
+            for (i = 0; i < arr.length; i++) 
+            {
+                document.write(arr[i] + "<br>");
+            }
+        }
+
+        var repeat = true;
+        while (repeat) 
+        {
+            var size = parseInt(prompt("Enter the size of the array"));
+
+            var arr = [];
+            for (var i = 0; i < size; i++) 
+            {
+                var number = parseFloat(prompt("Enter number " + (i + 1)));
+                arr.push(number);
+            }
+
+            var isValid = true;
+            for (var i = 0; i < arr.length; i++) 
+            {
+                if (isNaN(arr[i])) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (!isValid) 
+            {
+                alert("All values must be numbers.");
+                continue;
+            }
+
+            var choice = prompt("Choose an operation: \n" +
+                "a : Display array in original order \n" +
+                "b : Display array in ascending order \n" +
+                "c : Display array in descending order \n" +
+                "d : Display reversed array \n" +
+                "e : Display only even numbers \n" +
+                "f : Display numbers divisible by a given number \n" +
+                "g : Display array with a 30% discount \n" +
+                "h : Display array as a concatenated string"
+            ).toLowerCase();
+
+
+            switch (choice) 
+            {
+                case "a":
+                    document.write("Array in original order: <br>");
+
+                    printArray(arr);
+                    break;
+
+                case "b":
+                    arr.sort();
+                    document.write("Array in ascending order: <br>");
+                    printArray(arr);
+                    break;
+
+                case "c":
+                    arr.sort(function (a, b) { return b - a; });
+                    document.write("Array in descending order: <br>");
+                    printArray(arr);
+                    break;
+
+                case "d":
+                    var reversedArr = [arr].reverse();
+                    document.write("Reversed array:  <br>");
+                    printArray(arr);
+                    break;
+
+                case "e":
+                    var evenNumbers = [];
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] % 2 === 0) {
+                            evenNumbers.push(arr[i]);
+                        }
+                    }
+                    if (evenNumbers.length > 0) {
+                        document.write("Even numbers: <br>");
+                        printArray(evenNumbers);
+                    } else {
+                        alert("no even numbers found");
+                    }
+                    break;
+                case "f":
+                    var divisor = parseFloat(prompt("Enter the divisor number"));
+                    var divisable = [];
+                    for (var i = 0; i < arr.length; i++) 
+                    {
+                        if (arr[i] % divisor === 0) 
+                        {
+                            divisable.push(arr[i]);
+                        }
+                    }
+                    if (divisable.length > 0) 
+                    {
+                        document.write("numbers divisible by " + divisor + "<br>");
+                        printArray(divisable);
+
+                    } 
+                    else 
+                    {
+                        alert("No numbers divisible by " + divisor);
+                    }
+                    break;
+
+                case "g":
+                    var discountArr = [];
+                    for (var i = 0; i < arr.length; i++) 
+                    {
+                        discountedArr.push(arr[i] * 0.7);
+                    }
+                    document.write("Array with 30% discount: <br>");
+                    printArray(discountedArr);
+                    break;
+
+                case "h":
+                    var OneString = arr.join("***");
+                    document.write("The one string: " + OneString + "<br>");
+                    break;
+
+                default:
+                    alert("Invalid choice, please enter a valid option.");
+                    break;
+            }
+
+            var repeatChoice = prompt("Repeat? yes/no").toLowerCase();
+            if (repeatChoice !== 'yes') 
+            {
+                repeat = false;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

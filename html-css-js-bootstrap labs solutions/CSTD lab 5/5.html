@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>5</title>
+</head>
+
+<body>
+    <!-- document.write(`<tr>
+        <td>${arr[i][0]}</td>
+        <td>${arr[i][0]}</td></tr><tr>
+        <td>${arr[i][1]}</td>
+        <td>${arr[i][1]}</td></tr><tr>
+        <td>${arr[i][2]}</td>
+        <td>${arr[i][2]}</td></tr>
+        <td>${SumS1}</td>
+        <td>${SumS2}</td></tr>
+        </table>`); -->
+
+    <script>
+        var students = parseInt(prompt("Enter Number of students"));
+        var subjects = parseInt(prompt("Enter Number of subjects"));
+        var subj_sums = Array(subjects).fill(0);
+        var arr = new Array(subjects,students).fill(0,0);
+        for (var i = 0; i < students; i++) 
+        {
+            arr[i] = [];  
+            for (var j = 0; j < students; j++) 
+            {
+                arr[i][j] = 0;  
+            }
+        }
+
+        for (var j = 0; j < subjects; j++) 
+        {
+            for (var i = 0; i < students; i++) 
+            {
+                arr[j][i] = parseInt(prompt("Enter student " + (i + 1) + " grade for course" + (j+1)));
+                subj_sums[j] += arr[j][i];
+            }
+
+        }
+
+        document.write("<table border='2' cellpadding='2' cellspacing='2' bordercolor='black'><tr>");
+        for (var j = 0; j < students; j++)
+        {
+            document.write("<td>st"+(j+1)+"</td>")
+        }
+        document.write("</tr>");  
+        for (var j = 0; j < subjects; j++) 
+        {
+            document.write("<tr>");
+            for (var i = 0; i < students; i++) 
+            {
+                document.write("<td>" + arr[j][i] + "</td>");
+            }
+
+            document.write("<td>" + subj_sums[j] + "</td></tr>");
+        }
+
+        document.write("</table>");
+    </script>
+
+
+
+</body>
+
+</html>
