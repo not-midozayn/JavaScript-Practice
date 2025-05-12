@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>2</title>
+
+</head>
+<style>
+
+    body {
+        text-align: center;
+      }
+</style>
+
+<body>
+
+    <script>
+        let index = 0;
+        let counter = 10;
+        function changeBG() {
+            var images = [
+                './UP/1.jpg',
+                './UP/2.jpg',
+                './UP/3.jpg',
+                './UP/4.jpg',
+                './UP/5.jpg',
+                './UP/6.jpg',
+                './UP/7.jpg',
+                './UP/8.jpg',
+                './UP/9.jpg',
+                './UP/10.jpg'
+            ];
+            document.body.style.backgroundImage = "url(" + images[index] + ")";
+            index++;
+
+            if (index == 11) {
+                window.close();
+                return;
+            }
+
+        }
+
+        function counting() {
+            document.getElementById("countdown").innerHTML = counter;
+            counter--;
+            if (counter === 0) {
+                clearInterval(counting);
+            }
+        }
+        setInterval(counting, 1000);
+        setInterval(changeBG, 1000);
+    </script>
+    
+    <p id="countdown" style="padding: 20px; display: inline-bloc; text-align:  center;position: absolute;  margin: 100px 100px auto;background-color: #0a4b77; color: white; font-size: 40px ; border: 1px solid black;
+    border-radius: 10px;">10</p>
+</body>
+
+</html>
