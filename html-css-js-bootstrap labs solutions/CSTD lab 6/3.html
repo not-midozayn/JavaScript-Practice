@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slideshow</title>
+    <style>
+        div {
+
+            margin: 10px auto;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #mainwrapper {
+            width: 1000px;
+        }
+
+        #mainwrapper>div {
+            width: 500px;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        input {
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input:focus {
+            background-color: pink;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainwrapper">
+        <div id="imagewrapper">
+            <img src="./UP/1.jpg" id="myimg" />
+        </div>
+        <div id="controlswrapper">
+            <input type="button" value="Start" onclick="startShow();" />
+            <input type="button" value="Next" onclick="nextFun();" />
+            <input type="button" value="Prev" onclick="prevFun();" />
+            <input type="button" value="Stop" onclick="stopShow();" />
+        </div>
+    </div>
+    <script>
+        var flag = true;
+        var allimages = [
+            './UP/1.jpg',
+            './UP/2.jpg',
+            './UP/3.jpg',
+            './UP/4.jpg',
+            './UP/5.jpg',
+            './UP/6.jpg',
+            './UP/7.jpg',
+            './UP/8.jpg',
+            './UP/9.jpg',
+            './UP/10.jpg'
+        ];;
+        var i = 0;
+        function startShow() {
+            if (flag == true) {
+                t = setInterval("nextFun()", 1000);
+            }
+            flag = false;
+        }
+        function nextFun() {
+            i++;
+            if (i >= allimages.length) i = 0;
+            myimg.src = allimages[i];
+        }
+        function prevFun() {
+            i--;
+            if (i < 0) i = allimages.length - 1;
+            myimg.src = allimages[i];
+        }
+        function stopShow() {
+            flag = true;
+                clearInterval(t);
+        }
+    </script>
+</body>
+
+</html>
