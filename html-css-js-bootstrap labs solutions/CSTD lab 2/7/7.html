@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Form</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: green;">sponsorship</h1>
+    <hr>
+    
+    <!-- Section 1: Non-Profit Organization -->
+    <h2 style="color: green;">1. Non-Profit Organization</h2>
+    <form>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="organization_name"></td>
+                <td>Phone Number:</td>
+                <td><input type="text" name="organization_phone"></td>
+            </tr>
+            <tr>
+                <td>Street Address:</td>
+                <td colspan="3"><input type="text" name="organization_address" style="width: 100%;"></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text" name="organization_city"></td>
+                <td>State:</td>
+                <td><input type="text" name="organization_state"></td>
+            </tr>
+            <tr>
+                <td>Zip Code:</td>
+                <td><input type="text" name="organization_zip"></td>
+            </tr>
+        </table>
+        
+        <hr>
+        
+        <h2 style="color: green;">2. Sponsor Contact Information</h2>
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="sponsor_first_name"></td>
+                <td>Last Name:</td>
+                <td><input type="text" name="sponsor_last_name"></td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" name="sponsor_phone"></td>
+                <td>Email Address:</td>
+                <td><input type="text" name="sponsor_email"></td>
+            </tr>
+            <tr>
+                <td>Street Address:</td>
+                <td colspan="3"><input type="text" name="sponsor_address" style="width: 100%;"></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text" name="sponsor_city"></td>
+                <td>State:</td>
+                <td><input type="text" name="sponsor_state"></td>
+            </tr>
+            <tr>
+                <td>Zip Code:</td>
+                <td><input type="text" name="sponsor_zip"></td>
+            </tr>
+        </table>
+        
+        <hr>
+        
+        <h2 style="color: green;">3. Donation Information</h2>
+        <table>
+            <tr>
+                <td>Donation Amount:</td>
+                <td><input type="text" name="donation_amount"></td>
+            </tr>
+            <tr>
+                <td>Payment Method:</td>
+                <td>
+                    <select name="payment_method">
+                        <option value="credit_card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank_transfer">Bank Transfer</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+        <br>
+        <input type="submit" value="Submit" style="background-color: green; color: white; padding: 5px 10px;">
+    </form>
+</body>
+</html>
