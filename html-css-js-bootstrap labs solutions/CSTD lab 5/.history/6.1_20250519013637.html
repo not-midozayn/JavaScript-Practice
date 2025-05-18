@@ -11,16 +11,17 @@
         var words = input.split(" ");
         var word1 = "";
         var word2 = "";
-        var Capital_Output = "";
+    
         for (var i = 0; i < words.length; i++) 
         {
-            word1 = words[i].charAt(0).toUpperCase();
-            word2 = words[i].slice(1).toLowerCase();       
-            Capital_Output += word1 + word2 + " ";
+            words[i].charAt(0).toUpperCase();
+            words[i].slice(1).toLowerCase();
+            // Capital_Output = "";
+            // Capital_Output += word1 + " " + word2;          
         }
     
         document.write("Input: " + input + "<br>");
-        document.write("Output: " + Capital_Output + "<br>");
+        document.write("Output: " + words + "<br>");
     </script>
     
 </body>
