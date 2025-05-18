@@ -6,18 +6,22 @@
 </head>
 <body>
     <script>
-        var arr = new Array();
-        for (i = 0; i < 10; i++) 
-        {
-            arr.push(Math.floor(Math.random() * 10));
-
-        }
-        for (i = 0; i < arr.length; i++) 
-        {
-            document.write(`value Number ${i+1}-${arr[i]} <br>`);
-
-        }
-    </script>
-    
+        function generateRandomNumber(){
+            var arr = new Array();
+            for (i = 0; i < 10; i++) 
+            {
+                arr.push(Math.floor(Math.random() * 10));
+                
+            }
+            for (i = 0; i < arr.length; i++) 
+            {
+                document.getElementById("elementone").innerHTML += (`${arr[i]} <br>`);
+            }    
+            document.getElementById("elementone").innerHTML += (`<hr>`);  
+        };
+        </script>
+        <h1>Random Number Generator</h1>
+        <button onclick="generateRandomNumber()">Generate</button>
+        <p id="elementone">Generated Numbers <br></p>
 </body>
 </html>
