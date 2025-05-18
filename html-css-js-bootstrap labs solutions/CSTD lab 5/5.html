@@ -19,28 +19,53 @@
         </table>`); -->
 
     <script>
-        var students = parseInt(prompt("Enter Number of students"));
-        var subjects = parseInt(prompt("Enter Number of subjects"));
-        var subj_sums = Array(subjects).fill(0);
-        var arr = new Array(subjects,students).fill(0,0);
-        for (var i = 0; i < students; i++) 
-        {
-            arr[i] = [];  
-            for (var j = 0; j < students; j++) 
+        while (true){
+            var students = parseInt(prompt("Enter Number of students"));
+            if(students === "" || (isNaN(Number(students)) && students !== 0))
             {
-                arr[i][j] = 0;  
+                alert("Please enter a valid number");
+                continue;
             }
-        }
-
-        for (var j = 0; j < subjects; j++) 
-        {
+            while (true){
+                var subjects = parseInt(prompt("Enter Number of subjects"));
+                if(subjects === "" || (isNaN(Number(subjects)) && subjects !== 0))
+                {
+                    alert("Please enter a valid number");
+                    continue;
+                }else
+                {
+                    break;
+                }
+            }           
+            var subj_sums = new Array(subjects).fill(0);
+            var arr = new Array(subjects,students).fill(0,0);
             for (var i = 0; i < students; i++) 
             {
-                arr[j][i] = parseInt(prompt("Enter student " + (i + 1) + " grade for course" + (j+1)));
-                subj_sums[j] += arr[j][i];
+                arr[i] = [];  
+                for (var j = 0; j < students; j++) 
+                {
+                    arr[i][j] = 0;  
+                }
             }
 
+            for (var j = 0; j < subjects; j++) 
+            {
+                for (var i = 0; i < students; i++) 
+                {
+                    arr[j][i] = parseInt(prompt("Enter student " + (i + 1) + " grade for course" + (j+1)));
+                    if (arr[j][i] === "" || (isNaN(Number(arr[j][i])) && arr[j][i] !== 0))
+                    {
+                        alert("Please enter a valid number");
+                        i--;
+                        continue;
+                    }
+                    subj_sums[j] += arr[j][i];
+                }
+
+            }
+            break;
         }
+        
 
         document.write("<table border='2' cellpadding='2' cellspacing='2' bordercolor='black'><tr>");
         for (var j = 0; j < students; j++)
