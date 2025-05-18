@@ -9,9 +9,9 @@
     <script>
         function printArray(x) 
         {
-            for (i = 0; i < arr.length; i++) 
+            for (i = 0; i < x.length; i++) 
             {
-                document.write(arr[i] + "<br>");
+                document.write(x[i] + "<br>");
             }
         }
 
@@ -19,30 +19,23 @@
         while (repeat) 
         {
             var size = parseInt(prompt("Enter the size of the array"));
-
+            if(size ==="" || size === null || size === " " || isNaN(size)){
+                alert("invalid Size")
+                continue;
+            }
             var arr = [];
             for (var i = 0; i < size; i++) 
             {
                 var number = parseFloat(prompt("Enter number " + (i + 1)));
+                if(number ==="" || number === " " || number === null || isNaN(number)){
+                    alert("Please enter a valid number")
+                    i--;
+                    continue;
+                }
                 arr.push(number);
             }
-
-            var isValid = true;
-            for (var i = 0; i < arr.length; i++) 
-            {
-                if (isNaN(arr[i])) {
-                    isValid = false;
-                    break;
-                }
-            }
-
-            if (!isValid) 
-            {
-                alert("All values must be numbers.");
-                continue;
-            }
-
-            var choice = prompt("Choose an operation: \n" +
+            var choice = prompt(
+                "Choose an operation: \n" +
                 "a : Display array in original order \n" +
                 "b : Display array in ascending order \n" +
                 "c : Display array in descending order \n" +
@@ -58,7 +51,6 @@
             {
                 case "a":
                     document.write("Array in original order: <br>");
-
                     printArray(arr);
                     break;
 
@@ -75,18 +67,13 @@
                     break;
 
                 case "d":
-                    var reversedArr = [arr].reverse();
+                    var reversedArr = arr.reverse();
                     document.write("Reversed array:  <br>");
-                    printArray(arr);
+                    printArray(reversedArr);
                     break;
 
                 case "e":
-                    var evenNumbers = [];
-                    for (var i = 0; i < arr.length; i++) {
-                        if (arr[i] % 2 === 0) {
-                            evenNumbers.push(arr[i]);
-                        }
-                    }
+                    var evenNumbers = arr.filter( a => a % 2 === 0);
                     if (evenNumbers.length > 0) {
                         document.write("Even numbers: <br>");
                         printArray(evenNumbers);
@@ -96,10 +83,18 @@
                     break;
                 case "f":
                     var divisor = parseFloat(prompt("Enter the divisor number"));
+                    while (true) {
+                        if (divisor === 0 || divisor ==="" || divisor === " " || divisor === null || isNaN(divisor)){
+                            alert("invalid Divisor value, enter again!!")
+                            continue;
+                        }else {
+                            break;
+                        }
+                    }
                     var divisable = [];
                     for (var i = 0; i < arr.length; i++) 
                     {
-                        if (arr[i] % divisor === 0) 
+                        divisable = arr.filter(a => a % divisor === 0) 
                         {
                             divisable.push(arr[i]);
                         }
@@ -127,7 +122,7 @@
                     break;
 
                 case "h":
-                    var OneString = arr.join("***");
+                    var OneString = arr.join("*");
                     document.write("The one string: " + OneString + "<br>");
                     break;
 
@@ -136,8 +131,8 @@
                     break;
             }
 
-            var repeatChoice = prompt("Repeat? yes/no").toLowerCase();
-            if (repeatChoice !== 'yes') 
+            var repeatChoice = prompt("Repeat? y/n").toLowerCase();
+            if (repeatChoice !== 'y') 
             {
                 repeat = false;
             }
