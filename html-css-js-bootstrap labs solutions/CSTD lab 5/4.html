@@ -8,22 +8,27 @@
     <script>
         while (true) {
             var name = prompt("Enter your name");
-            if (!isNaN(name) === false) {
-
+            if ( name !== null && name !== "" && name !== " " && isNaN(name))
+            {
                 while (true) {
-                    var mobile = prompt("Enter your mobile number");
+                    var mobile = prompt("Enter your mobile number"); 
                     if (
-                        (
-                            mobile.indexOf("010") === 0  ||
-                            mobile.indexOf("011") === 0  ||
-                            mobile.indexOf("012") === 0  ||
-                            mobile.indexOf("015") === 0) &&
-                            mobile.length === 11         &&
-                            mobile.charAt(3) === "-"     &&
-                            !isNaN(mobile.replace("-", ""))
+                               
+                            mobile !== ""                           &&  
+                            mobile !== null                         &&                   
+                            (
+                                mobile.indexOf("010") === 0         ||                    
+                                mobile.indexOf("011") === 0         ||
+                                mobile.indexOf("012") === 0         ||
+                                mobile.indexOf("015") === 0
+                            )                                       &&
+                            mobile.length === 11                    &&
+                            mobile.charAt(3) === "-"                &&                            
+                            !isNaN(Number(mobile.replace("-", "")))  
                     ) {
 
                         alert(`your name is ${name} and your mobile is ${mobile}`)
+                        document.write(`your name is ${name} and your mobile is ${mobile}`);
                         break;
                     }
                     else {
