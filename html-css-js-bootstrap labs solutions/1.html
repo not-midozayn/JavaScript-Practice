@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>1</title>
+</head>
+
+<body>
+    <script>
+        function printArray(x) {
+            for (i = 0; i < x.length; i++) {
+                document.write(x[i] + "<br>");
+            }
+        }
+        let arr = [];
+        while (true) {
+            let Nums = prompt(`enter number of numbers`);
+            if (isNaN(Number(Nums)) || Nums.split("").indexOf(" ") != -1) {
+                alert("the enterd value is not a number, ReEnter the value")
+                continue;
+            }
+            while (true) {
+                for (i = 0; i < Nums; i++) {
+                    arr[i] = prompt(`enter number ${i + 1}`);
+                    if (isNaN(Number(arr[i])) || arr[i].split("").indexOf(" ") != -1) {
+                        alert(`the entered value is not a number, please re-enter the value`)
+                        i--;
+                    }
+                }
+                break;
+            }
+            break;
+        }
+
+        
+        
+        let morethan50 = []
+        while(true){
+            var choice = prompt("Choose an operation: \n" +
+                "a : Filter numbers more than 50 \n" +
+                "b : array ascending\n" +
+                "c : array descending\n" +
+                "d : Maximum value in the array \n" +
+                "e : Minimum value in the array \n"
+            ).toLowerCase();
+        switch (choice) {
+            case "a":
+                document.write("Number/s more than 50: <br>");
+                morethan50 = (arr.filter(x => x > 50));
+                printArray(morethan50);
+                break;
+
+            case "b":
+                arr.sort();
+                document.write("Array in ascending order: <br>");
+                printArray(arr);
+                break;
+
+            case "c":
+                arr.sort((a, b) => b - a);
+                document.write("Array in descending order: <br>");
+                printArray(arr);
+                break;
+
+            case "d":
+                document.write(`Maximum number is ${(Math.max(...arr))} <br>`);
+                break;
+            case "e":
+                document.write(`Minimum number is ${(Math.min(...arr))}`);
+                break;
+
+            default:
+                alert("Invalid choice, please enter a valid option.");
+                continue;
+        }
+        break;
+    }
+
+    </script>
+</body>
+
+</html>
