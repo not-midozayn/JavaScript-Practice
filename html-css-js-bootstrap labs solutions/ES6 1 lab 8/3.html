@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const Pro = (_Pname, _Pid, _duration) => {
+            return {
+                projectName: _Pname,
+                projectId: _Pid,
+                duration: _duration,
+                printf: function () {
+                    console.log(`${this.projectName}\n ${this.projectId} \n ${this.duration}h`)
+                }
+            }
+        }
+        while (true) {
+            let projectName = prompt(`enter project name:`);
+            if (!isNaN(Number(projectName))) {
+                alert(`Invalid name`);
+                continue;
+            }
+            let pid;
+            while (true) {
+                pid = prompt(`enter project id:`);
+                if (isNaN(Number(pid)) || pid.split("").indexOf(" ") != -1 || !pid) {
+                    alert(`Invalid id`);
+                    continue;
+                }
+                break;
+            }
+            let duration;
+            while (true) {
+                duration = prompt(`enter project duration in hours:`);
+                if (isNaN(Number(duration)) || duration.split("").indexOf(" ") != -1 || !duration) {
+                    alert(`Invalid id`);
+                    continue;
+                }
+                break;
+            }
+            let myProj = Pro(projectName, pid, duration);
+            myProj.printf();
+            break;
+        }
+
+    </script>
+
+</body>
+
+</html>
