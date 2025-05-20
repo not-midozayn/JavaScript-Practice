@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>2</title>
+</head>
+<script>
+    function docalculations(op, Args) {
+        switch (op) {
+            case "+":
+                let Add = Args.reduce((sum, x) => sum += x);
+                console.log(`result for sum operation = ${Add}`);
+                break;
+            case "-":
+                let Subtract = Args.reduce((sum, x) => sum -= x);
+                console.log(`result for Subtract operation = ${Subtract}`);
+                break;
+            case "*":
+                sum = 1;
+                let Multiply = Args.reduce((sum, x) => sum *= x);
+                console.log(`result for Multiply operation = ${Multiply}`);
+                break;
+            case "/":
+                let divide = Args.reduce((sum, x) => sum /= x);
+                console.log(`result for Divide operation = ${divide}`);
+                break;
+            default:
+                console.log(`Invalid Operation`);
+
+                break;
+        }
+    }
+
+    while (true) {
+        let size = parseInt(prompt("Enter the size of the array"));
+        if (isNaN(size)) {
+            alert(`Invalid Size`);
+            continue;
+        }
+        var operations = ["+", "-", "*", "/"]
+        let Op; 
+        while (true) {
+            Op = prompt("Enter the Operation");
+            if (!operations.includes(Op)) {
+                alert(`Invalid Operation`);
+                continue;
+            }
+            break;
+        }
+        let arr = [];
+        for (i = 0; i < size; i++) {
+            arr[i] = prompt(`Enter Number${i + 1}`);
+            if (isNaN(Number(arr[i])) || arr[i].split("").indexOf(" ") != -1) {
+                alert(`the entered value is not a number, please re-enter the value`)
+                i--;
+            }
+            else if (i!=0 && arr[i]==0 && Op == "/")
+            {
+                alert(`Can't divide by 0, please re-enter the value`)
+                i--;
+            }
+        }
+
+        docalculations(Op, arr);
+        if (i == size) {
+            break;
+        }
+    }
+
+</script>
+
+<body>
+
+</body>
+
+</html>
