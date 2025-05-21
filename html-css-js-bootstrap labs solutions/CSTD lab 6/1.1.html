@@ -17,8 +17,8 @@
         window.scrollBy(0, 100);
 
         if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-            window.close();
             clearInterval(scrolling);
+            window.close();
         }
     }
 

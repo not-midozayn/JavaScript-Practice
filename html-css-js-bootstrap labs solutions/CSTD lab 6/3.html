@@ -46,10 +46,10 @@
             <img src="./UP/1.jpg" id="myimg" />
         </div>
         <div id="controlswrapper">
-            <input type="button" value="Start" onclick="startShow();" />
-            <input type="button" value="Next" onclick="nextFun();" />
-            <input type="button" value="Prev" onclick="prevFun();" />
-            <input type="button" value="Stop" onclick="stopShow();" />
+            <input id="start" type="button" value="Start" onclick="startShow();" />
+            <input id="next" type="button" value="Next" onclick="nextFun();" />
+            <input id="prev" type="button" value="Prev" onclick="prevFun();" />
+            <input id="stop" type="button" value="Stop" onclick="stopShow();" />
         </div>
     </div>
     <script>
@@ -67,11 +67,17 @@
             './UP/10.jpg'
         ];;
         var i = 0;
+        document.getElementById("stop").disabled = flag
         function startShow() {
             if (flag == true) {
+                document.getElementById("start").disabled = flag
+                document.getElementById("next").disabled = flag
+                document.getElementById("prev").disabled = flag
                 t = setInterval("nextFun()", 1000);
             }
             flag = false;
+            document.getElementById("stop").disabled = flag
+
         }
         function nextFun() {
             i++;
@@ -85,7 +91,12 @@
         }
         function stopShow() {
             flag = true;
-                clearInterval(t);
+            document.getElementById("start").disabled = !flag
+            document.getElementById("next").disabled = !flag
+            document.getElementById("prev").disabled = !flag
+            document.getElementById("stop").disabled = flag
+            clearInterval(t);
+
         }
     </script>
 </body>
