@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2</title>
+    <style>
+        .user-container {
+            background-color: #000000;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .user-button {
+            display: inline-block;
+            background-color: #0099ff;
+            color: #fff;
+            padding: 10px 15px;
+        }
+
+        .user-button:hover {
+            background-color: red;
+        }
+    </style>
+
+
+    </style>
+</head>
+
+<body>
+    <div id="user-container" class="user-container">
+    </div>
+
+    <div id="user-details" class="user-details">
+    </div>
+
+    <script>
+        let userContainer = document.getElementById('user-container');
+        let userDetails = document.getElementById('user-details');
+        let flagy = false;
+        async function fetchUserNames() {
+            let response = await fetch('https://jsonplaceholder.typicode.com/users');
+            let users = await response.json();
+            return users;
+        }
+        fetchUserNames().then(users => 
+        {
+            for (let i = 0; i < users.length; i++) {
+
+                let user = document.createElement('div');
+                user.className = 'user-button';
+                user.textContent = users[i].name;
+                userContainer.appendChild(user);
+                user.onclick = () => {
+
+                    if (flagy === user) {
+                        flagy = false;
+                    } else {
+                        // Deactivate any previously active button
+                        if (flagy) flagy.style.backgroundColor = '#0099ff';
+
+                        // Activate the clicked button
+                        user.style.backgroundColor = 'red';
+                        flagy = user;
+
+                    }
+                    userDetails.innerHTML = `
+                        <ul>
+                            <li>Name: ${users[i].name}</li>
+                            <li>Email: ${users[i].email}</li>
+                            <li>Phone: ${users[i].phone}</li>
+                            <li>Website: ${users[i].website}</li>
+                            <li>Company: ${users[i].company.name}</li>
+                            </ul>
+                            `;
+                };
+            }
+        })
+    </script>
+</body>
+
+</html>
