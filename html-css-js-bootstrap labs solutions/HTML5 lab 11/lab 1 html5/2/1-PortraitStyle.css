@@ -1,0 +1,26 @@
+@media all and (orientation: portrait) {
+    .lorem {
+        margin: 30px; 
+    }
+}
+
+
+.content1 {
+    text-align: center;
+    width: 70vh;
+    transition: all 0.7s;
+    margin-bottom: 20px;
+}
+
+.content2 {
+    text-align: center;
+    width: 70vh;
+    transition: all 0.7s;
+    margin-bottom: 20px;
+}
+.content3 {
+    text-align: center;
+    width: 70vh;
+    transition: all 0.7s;
+    margin-bottom: 20px;
+}

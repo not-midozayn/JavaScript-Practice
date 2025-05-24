@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        #mainwrapper {
+            width: 100vw;
+            height: 100vh;
+            border: 2px solid black;
+            background-color: yellow;
+            display: grid;
+            /* grid-template-rows:repeat(5,10px);*/
+            /* grid-template-rows:1fr 0.5fr 1fr 1fr 1fr; */
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 5fr 5fr 5fr;
+            grid-template-areas: "ink row1 row1 row1 row1"
+                "ink row2 row2 row2 row2"
+                "ink row3 row3 row3 row3"
+                "ink row4 row4 row4 row4"
+            ;
+        }
+
+        #mainwrapper {
+            background-color: orange;
+            ;
+            border: 1px solid black;
+        }
+
+
+        #ink {
+            grid-area: ink;
+            background-color: white;
+            text-align: center;
+
+        }
+
+        #row1 {
+            grid-area: row1;
+            color: white;
+            background-color: rgb(121, 100, 55);
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        #row1>span {
+            padding: 20px;
+            margin: auto;
+        }
+
+        #row2 {
+            grid-area: row2;
+
+        }
+
+        #row3 {
+            grid-area: row3;
+        }
+
+        #row4 {
+            grid-area: row4;
+        }
+
+        #row2,
+        #row3,
+        #row4 {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            gap: 0;
+        }
+
+        #row2>img,
+        #row3>img,
+        #row4>img {
+            width: 25%;
+            height: 33.333vh;
+            margin: 0;
+            padding: 0;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainwrapper">
+        <div id="ink">
+            <img src="ink.jpg" style="width:150px; display:flex; float:left;">
+            <h3>Portofolio</h3>
+            <p>About Us</p>
+            <p>Blog</p>
+            <p>Buy This Theme</p>
+            <img src="twitter.png" style="width:25px">
+            <img src="V.png" style="width:25px">
+            <img src="Wikipedia.png" style="width:25px">
+            <h3>A text Widget</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut nobis accusantium corporis dicta vero
+                temporibus </p>
+            <p>Flicker</p>
+            <img src="./images/1.jpg" style="width: 35px">
+            <img src="./images/2.jpg" style="width: 35px">
+            <img src="./images/3.jpg" style="width: 35px">
+            <br>
+            <img src="./images/4.jpg" style="width: 35px">
+            <img src="./images/5.jpg" style="width: 35px">
+            <img src="./images/6.jpg" style="width: 35px">
+        </div>
+
+
+        <div id="row1" style="display:inline" ;>
+            <span>All</span>
+            <span>Illustrations</span>
+            <span>Motion</span>
+            <span>Photography</span>
+            <span>Print</span>
+        </div>
+        <div id="row2">
+            <img src="./images/3.jpg">
+            <img src="./images/4.jpg">
+            <img src="./images/5.jpg">
+            <img src="./images/6.jpg">
+        </div>
+        <div id="row3">
+            <img src="./images/3.jpg">
+            <img src="./images/4.jpg">
+            <img src="./images/5.jpg">
+            <img src="./images/6.jpg">
+        </div>
+        <div id="row4">
+            <img src="./images/3.jpg">
+            <img src="./images/4.jpg">
+            <img src="./images/5.jpg">
+            <img src="./images/6.jpg">
+        </div>
+    </div>
+</body>
+
+</html>
