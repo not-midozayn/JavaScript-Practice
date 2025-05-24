@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Events Example</title>
+</head>
+<body>
+
+  <h2>KeyUp Input (prints after key is released)</h2>
+  <input type="text" id="keyupInput" placeholder="Type here (keyup)">
+  <p id="keyupOutput"></p>
+
+  <h2>KeyDown Input (prints while key is pressed)</h2>
+  <input type="text" id="keydownInput" placeholder="Type here (keydown)">
+  <p id="keydownOutput"></p>
+
+  <script>
+    const keyupInput = document.getElementById('keyupInput');
+    const keydownInput = document.getElementById('keydownInput');
+
+    keyupInput.addEventListener('keyup', function(event) {
+      document.getElementById('keyupOutput').textContent = 'Key released: ' + event.key;
+    });
+
+    keydownInput.addEventListener('keydown', function(event) {
+      document.getElementById('keydownOutput').textContent = 'Key pressed: ' + event.key;
+    });
+  </script>
+
+</body>
+</html>
