@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slideshow</title>
+
+    <style>
+        .controlswrapper {
+
+            margin: 10px auto;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #mainwrapper {
+            width: 1000px;
+        }
+
+        #mainwrapper>div {
+            width: 500px;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        input {
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input:focus {
+            background-color: rgb(69, 69, 243);
+            font-weight: bold;
+        }
+
+        @keyframes animo {
+            0% {
+                background-color: red;
+                left: 0px;
+                top: 0px;
+            }
+
+            25% {
+                background-color: yellow;
+                left: 200px;
+                top: 0px;
+            }
+
+            50% {
+                background-color: blue;
+                left: 200px;
+                top: 200px;
+            }
+
+            75% {
+                background-color: green;
+                left: 0px;
+                top: 200px;
+            }
+
+            100% {
+                background-color: red;
+                left: 0px;
+                top: 0px;
+            }
+        }
+
+        .dd {
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            animation: animo;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+
+        .dd:hover {
+
+            animation-play-state: paused;
+        }
+
+        .paused {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="controlswrapper">
+        <input type="button" value="Start" onclick="start_animo();" />
+        <input type="button" value="Pause" onclick="pause_animo();" />
+        <input type="button" value="Stop" onclick="stop_animo();" />
+    </div>
+    <div id="Divo"></div>
+
+    <script>
+        var flag = true;
+        function start_animo() {
+            if (flag == true) {
+                document.getElementById("Divo").classList.remove("paused");
+                document.getElementById("Divo").classList.add("dd");
+            }
+            flag = false;
+        }
+        function stop_animo() {
+            document.getElementById("Divo").classList.remove("dd");
+            flag = true;
+        }
+        function pause_animo() {
+            document.getElementById("Divo").classList.add("paused");
+            flag = true;
+        }
+
+    </script>
+</body>
+</head>
+
+
+</html>
