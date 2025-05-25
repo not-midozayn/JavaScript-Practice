@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>css_cheat_sheet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="complete-css-cheat-sheet---modern-web-development">Complete CSS Cheat Sheet - Modern Web Development</h1>
+<h2 id="css-selectors">CSS Selectors</h2>
+<h3 id="basic-selectors">Basic Selectors</h3>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Syntax</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Universal</strong></td>
+<td><code>*</code></td>
+<td>Selects all elements</td>
+<td><code>* { margin: 0; }</code></td>
+</tr>
+<tr>
+<td><strong>Type/Element</strong></td>
+<td><code>element</code></td>
+<td>Selects all elements of a type</td>
+<td><code>div { color: blue; }</code></td>
+</tr>
+<tr>
+<td><strong>Class</strong></td>
+<td><code>.classname</code></td>
+<td>Selects elements with specific class</td>
+<td><code>.button { padding: 10px; }</code></td>
+</tr>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>#idname</code></td>
+<td>Selects element with specific ID</td>
+<td><code>#header { height: 100px; }</code></td>
+</tr>
+<tr>
+<td><strong>Attribute</strong></td>
+<td><code>[attribute]</code></td>
+<td>Selects elements with attribute</td>
+<td><code>[disabled] { opacity: 0.5; }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="attribute-selectors-advanced">Attribute Selectors (Advanced)</h3>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[attr=&quot;value&quot;]</code></td>
+<td>Exact match</td>
+<td><code>[type=&quot;text&quot;] { border: 1px solid; }</code></td>
+</tr>
+<tr>
+<td><code>[attr^=&quot;value&quot;]</code></td>
+<td>Starts with</td>
+<td><code>[href^=&quot;https&quot;] { color: green; }</code></td>
+</tr>
+<tr>
+<td><code>[attr$=&quot;value&quot;]</code></td>
+<td>Ends with</td>
+<td><code>[href$=&quot;.pdf&quot;] { color: red; }</code></td>
+</tr>
+<tr>
+<td><code>[attr*=&quot;value&quot;]</code></td>
+<td>Contains</td>
+<td><code>[class*=&quot;btn&quot;] { padding: 5px; }</code></td>
+</tr>
+<tr>
+<td><code>[attr~=&quot;value&quot;]</code></td>
+<td>Contains word</td>
+<td><code>[class~=&quot;active&quot;] { font-weight: bold; }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="combinators">Combinators</h3>
+<table>
+<thead>
+<tr>
+<th>Combinator</th>
+<th>Syntax</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Descendant</strong></td>
+<td><code>A B</code></td>
+<td>B inside A (any level)</td>
+<td><code>div p { margin: 10px; }</code></td>
+</tr>
+<tr>
+<td><strong>Child</strong></td>
+<td><code>A &gt; B</code></td>
+<td>B direct child of A</td>
+<td><code>ul &gt; li { list-style: none; }</code></td>
+</tr>
+<tr>
+<td><strong>Adjacent Sibling</strong></td>
+<td><code>A + B</code></td>
+<td>B immediately after A</td>
+<td><code>h1 + p { margin-top: 0; }</code></td>
+</tr>
+<tr>
+<td><strong>General Sibling</strong></td>
+<td><code>A ~ B</code></td>
+<td>B siblings after A</td>
+<td><code>h1 ~ p { color: gray; }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pseudo-classes">Pseudo-classes</h3>
+<table>
+<thead>
+<tr>
+<th>Pseudo-class</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:hover</code></td>
+<td>Mouse over</td>
+<td><code>button:hover { background: blue; }</code></td>
+</tr>
+<tr>
+<td><code>:focus</code></td>
+<td>Element focused</td>
+<td><code>input:focus { outline: 2px solid blue; }</code></td>
+</tr>
+<tr>
+<td><code>:active</code></td>
+<td>Element being clicked</td>
+<td><code>button:active { transform: scale(0.95); }</code></td>
+</tr>
+<tr>
+<td><code>:visited</code></td>
+<td>Visited links</td>
+<td><code>a:visited { color: purple; }</code></td>
+</tr>
+<tr>
+<td><code>:first-child</code></td>
+<td>First child element</td>
+<td><code>li:first-child { font-weight: bold; }</code></td>
+</tr>
+<tr>
+<td><code>:last-child</code></td>
+<td>Last child element</td>
+<td><code>li:last-child { border-bottom: none; }</code></td>
+</tr>
+<tr>
+<td><code>:nth-child(n)</code></td>
+<td>Nth child</td>
+<td><code>tr:nth-child(even) { background: #f0f0f0; }</code></td>
+</tr>
+<tr>
+<td><code>:not()</code></td>
+<td>Not matching selector</td>
+<td><code>input:not([type=&quot;submit&quot;]) { border: 1px solid; }</code></td>
+</tr>
+<tr>
+<td><code>:empty</code></td>
+<td>Empty elements</td>
+<td><code>p:empty { display: none; }</code></td>
+</tr>
+<tr>
+<td><code>:disabled</code></td>
+<td>Disabled form elements</td>
+<td><code>input:disabled { opacity: 0.5; }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pseudo-elements">Pseudo-elements</h3>
+<table>
+<thead>
+<tr>
+<th>Pseudo-element</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>::before</code></td>
+<td>Insert content before</td>
+<td><code>.icon::before { content: &quot;★&quot;; }</code></td>
+</tr>
+<tr>
+<td><code>::after</code></td>
+<td>Insert content after</td>
+<td><code>.tooltip::after { content: attr(data-tip); }</code></td>
+</tr>
+<tr>
+<td><code>::first-letter</code></td>
+<td>First letter</td>
+<td><code>p::first-letter { font-size: 2em; }</code></td>
+</tr>
+<tr>
+<td><code>::first-line</code></td>
+<td>First line</td>
+<td><code>p::first-line { font-weight: bold; }</code></td>
+</tr>
+<tr>
+<td><code>::selection</code></td>
+<td>Selected text</td>
+<td><code>::selection { background: yellow; }</code></td>
+</tr>
+<tr>
+<td><code>::placeholder</code></td>
+<td>Input placeholder</td>
+<td><code>input::placeholder { color: gray; }</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="layout-properties">Layout Properties</h2>
+<h3 id="display-types">Display Types</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>display: block</code></td>
+<td>Full width, new line</td>
+<td>Default for div, p, h1-h6</td>
+</tr>
+<tr>
+<td><code>display: inline</code></td>
+<td>Content width, same line</td>
+<td>Default for span, a, strong</td>
+</tr>
+<tr>
+<td><code>display: inline-block</code></td>
+<td>Content width, same line, accepts width/height</td>
+<td>Buttons, inline elements that need sizing</td>
+</tr>
+<tr>
+<td><code>display: flex</code></td>
+<td>Flexible box layout</td>
+<td>Most layouts, component alignment</td>
+</tr>
+<tr>
+<td><code>display: grid</code></td>
+<td>Grid-based layout</td>
+<td>Complex layouts, 2D positioning</td>
+</tr>
+<tr>
+<td><code>display: none</code></td>
+<td>Hide completely</td>
+<td>Conditional visibility</td>
+</tr>
+<tr>
+<td><code>visibility: hidden</code></td>
+<td>Hide but keep space</td>
+<td>Keep layout, hide content</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flex vs Grid Decision:</strong></p>
+<ul>
+<li><strong>Use Flexbox</strong> for 1D layouts (rows OR columns), component alignment, centering</li>
+<li><strong>Use Grid</strong> for 2D layouts (rows AND columns), complex page layouts, overlapping content</li>
+</ul>
+<h3 id="flexbox-properties">Flexbox Properties</h3>
+<h4 id="container-properties">Container Properties</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Values</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flex-direction</code></td>
+<td><code>row</code>, <code>column</code>, <code>row-reverse</code>, <code>column-reverse</code></td>
+<td>Direction of items</td>
+</tr>
+<tr>
+<td><code>flex-wrap</code></td>
+<td><code>nowrap</code>, <code>wrap</code>, <code>wrap-reverse</code></td>
+<td>Allow wrapping</td>
+</tr>
+<tr>
+<td><code>justify-content</code></td>
+<td><code>flex-start</code>, <code>center</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code></td>
+<td>Horizontal alignment</td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td><code>stretch</code>, <code>flex-start</code>, <code>center</code>, <code>baseline</code>, <code>flex-end</code></td>
+<td>Vertical alignment</td>
+</tr>
+<tr>
+<td><code>align-content</code></td>
+<td>Same as justify-content</td>
+<td>Align wrapped lines</td>
+</tr>
+<tr>
+<td><code>gap</code></td>
+<td><code>10px</code>, <code>1rem</code></td>
+<td>Space between items</td>
+</tr>
+</tbody>
+</table>
+<h4 id="item-properties">Item Properties</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flex-grow</code></td>
+<td>How much to grow</td>
+<td><code>flex-grow: 1</code> (take available space)</td>
+</tr>
+<tr>
+<td><code>flex-shrink</code></td>
+<td>How much to shrink</td>
+<td><code>flex-shrink: 0</code> (don't shrink)</td>
+</tr>
+<tr>
+<td><code>flex-basis</code></td>
+<td>Initial size</td>
+<td><code>flex-basis: 200px</code></td>
+</tr>
+<tr>
+<td><code>flex</code></td>
+<td>Shorthand</td>
+<td><code>flex: 1 0 auto</code> (grow, shrink, basis)</td>
+</tr>
+<tr>
+<td><code>align-self</code></td>
+<td>Override align-items</td>
+<td><code>align-self: center</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="grid-properties">Grid Properties</h3>
+<h4 id="container-properties">Container Properties</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grid-template-columns</code></td>
+<td>Define columns</td>
+<td><code>grid-template-columns: 1fr 2fr 1fr</code></td>
+</tr>
+<tr>
+<td><code>grid-template-rows</code></td>
+<td>Define rows</td>
+<td><code>grid-template-rows: auto 1fr auto</code></td>
+</tr>
+<tr>
+<td><code>grid-template-areas</code></td>
+<td>Named areas</td>
+<td><code>grid-template-areas: &quot;header header&quot; &quot;sidebar main&quot;</code></td>
+</tr>
+<tr>
+<td><code>grid-gap</code> / <code>gap</code></td>
+<td>Spacing</td>
+<td><code>gap: 20px 10px</code> (row column)</td>
+</tr>
+<tr>
+<td><code>justify-items</code></td>
+<td>Horizontal item alignment</td>
+<td><code>justify-items: center</code></td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td>Vertical item alignment</td>
+<td><code>align-items: start</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="item-properties">Item Properties</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grid-column</code></td>
+<td>Column span</td>
+<td><code>grid-column: 1 / 3</code> or <code>grid-column: span 2</code></td>
+</tr>
+<tr>
+<td><code>grid-row</code></td>
+<td>Row span</td>
+<td><code>grid-row: 1 / -1</code> (full height)</td>
+</tr>
+<tr>
+<td><code>grid-area</code></td>
+<td>Named area</td>
+<td><code>grid-area: header</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="positioning">Positioning</h2>
+<h3 id="position-types">Position Types</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>static</code></td>
+<td>Normal flow (default)</td>
+<td>Regular content</td>
+</tr>
+<tr>
+<td><code>relative</code></td>
+<td>Normal flow + offset</td>
+<td>Small adjustments, positioning context</td>
+</tr>
+<tr>
+<td><code>absolute</code></td>
+<td>Removed from flow, positioned relative to nearest positioned ancestor</td>
+<td>Overlays, tooltips, modals</td>
+</tr>
+<tr>
+<td><code>fixed</code></td>
+<td>Positioned relative to viewport</td>
+<td>Navigation bars, floating buttons</td>
+</tr>
+<tr>
+<td><code>sticky</code></td>
+<td>Relative until scroll threshold</td>
+<td>Sticky headers, table headers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Positioning Offset Properties:</strong> <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></p>
+<h3 id="z-index-management">Z-Index Management</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Common z-index layers */</span>
+<span class="hljs-selector-class">.background</span> { <span class="hljs-attribute">z-index</span>: -<span class="hljs-number">1</span>; }
+<span class="hljs-selector-class">.content</span> { <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>; }
+<span class="hljs-selector-class">.header</span> { <span class="hljs-attribute">z-index</span>: <span class="hljs-number">10</span>; }
+<span class="hljs-selector-class">.dropdown</span> { <span class="hljs-attribute">z-index</span>: <span class="hljs-number">100</span>; }
+<span class="hljs-selector-class">.modal</span> { <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1000</span>; }
+<span class="hljs-selector-class">.tooltip</span> { <span class="hljs-attribute">z-index</span>: <span class="hljs-number">10000</span>; }
+</div></code></pre>
+<hr>
+<h2 id="box-model">Box Model</h2>
+<h3 id="box-sizing">Box Sizing</h3>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content-box</code></td>
+<td>Width/height applies to content only</td>
+<td>Default, legacy layouts</td>
+</tr>
+<tr>
+<td><code>border-box</code></td>
+<td>Width/height includes padding and border</td>
+<td><strong>Recommended for all elements</strong></td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Modern reset */</span>
+*, *<span class="hljs-selector-pseudo">::before</span>, *<span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+</div></code></pre>
+<h3 id="spacing-properties">Spacing Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>margin</code></td>
+<td>External spacing</td>
+<td><code>margin: 10px 20px</code> (vertical horizontal)</td>
+</tr>
+<tr>
+<td><code>padding</code></td>
+<td>Internal spacing</td>
+<td><code>padding: 1rem</code></td>
+</tr>
+<tr>
+<td><code>border</code></td>
+<td>Element border</td>
+<td><code>border: 2px solid #333</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Margin vs Padding Decision:</strong></p>
+<ul>
+<li><strong>Margin</strong>: Space between elements, can collapse, use for layout spacing</li>
+<li><strong>Padding</strong>: Space within element, never collapses, use for content spacing</li>
+</ul>
+<hr>
+<h2 id="typography">Typography</h2>
+<h3 id="font-properties">Font Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>font-family</code></td>
+<td>Font stack</td>
+<td><code>font-family: 'Helvetica', Arial, sans-serif</code></td>
+</tr>
+<tr>
+<td><code>font-size</code></td>
+<td>Text size</td>
+<td><code>font-size: 1.2rem</code></td>
+</tr>
+<tr>
+<td><code>font-weight</code></td>
+<td>Text thickness</td>
+<td><code>font-weight: 400</code> (normal), <code>700</code> (bold)</td>
+</tr>
+<tr>
+<td><code>line-height</code></td>
+<td>Line spacing</td>
+<td><code>line-height: 1.5</code> (unitless preferred)</td>
+</tr>
+<tr>
+<td><code>letter-spacing</code></td>
+<td>Character spacing</td>
+<td><code>letter-spacing: 0.05em</code></td>
+</tr>
+<tr>
+<td><code>text-align</code></td>
+<td>Horizontal alignment</td>
+<td><code>text-align: center</code></td>
+</tr>
+<tr>
+<td><code>text-decoration</code></td>
+<td>Underlines, strikethrough</td>
+<td><code>text-decoration: none</code></td>
+</tr>
+<tr>
+<td><code>text-transform</code></td>
+<td>Case transformation</td>
+<td><code>text-transform: uppercase</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="modern-font-loading">Modern Font Loading</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">@font-face</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'CustomFont'</span>;
+  <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'font.woff2'</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">'woff2'</span>);
+  <span class="hljs-attribute">font-display</span>: swap; <span class="hljs-comment">/* Improves loading performance */</span>
+}
+</div></code></pre>
+<hr>
+<h2 id="colors-and-backgrounds">Colors and Backgrounds</h2>
+<h3 id="color-formats">Color Formats</h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hex</strong></td>
+<td>Simple colors</td>
+<td><code>#ff0000</code>, <code>#f00</code></td>
+</tr>
+<tr>
+<td><strong>RGB</strong></td>
+<td>When you need alpha</td>
+<td><code>rgb(255, 0, 0)</code></td>
+</tr>
+<tr>
+<td><strong>RGBA</strong></td>
+<td>Transparency</td>
+<td><code>rgba(255, 0, 0, 0.5)</code></td>
+</tr>
+<tr>
+<td><strong>HSL</strong></td>
+<td>Color manipulation</td>
+<td><code>hsl(0, 100%, 50%)</code></td>
+</tr>
+<tr>
+<td><strong>HSLA</strong></td>
+<td>HSL with transparency</td>
+<td><code>hsla(0, 100%, 50%, 0.5)</code></td>
+</tr>
+<tr>
+<td><strong>CSS Variables</strong></td>
+<td>Reusable colors</td>
+<td><code>var(--primary-color)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="background-properties">Background Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>background-color</code></td>
+<td>Solid color</td>
+<td><code>background-color: #f0f0f0</code></td>
+</tr>
+<tr>
+<td><code>background-image</code></td>
+<td>Image/gradient</td>
+<td><code>background-image: url('image.jpg')</code></td>
+</tr>
+<tr>
+<td><code>background-size</code></td>
+<td>Image sizing</td>
+<td><code>background-size: cover</code></td>
+</tr>
+<tr>
+<td><code>background-position</code></td>
+<td>Image position</td>
+<td><code>background-position: center</code></td>
+</tr>
+<tr>
+<td><code>background-repeat</code></td>
+<td>Image repetition</td>
+<td><code>background-repeat: no-repeat</code></td>
+</tr>
+<tr>
+<td><code>background-attachment</code></td>
+<td>Scroll behavior</td>
+<td><code>background-attachment: fixed</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="modern-gradients">Modern Gradients</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Linear gradient */</span>
+<span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">linear-gradient</span>(45<span class="hljs-selector-tag">deg</span>, <span class="hljs-selector-id">#ff6b6b</span>, <span class="hljs-selector-id">#4ecdc4</span>);
+
+<span class="hljs-comment">/* Radial gradient */</span>
+<span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">radial-gradient</span>(<span class="hljs-selector-tag">circle</span>, <span class="hljs-selector-id">#ff6b6b</span>, <span class="hljs-selector-id">#4ecdc4</span>);
+
+<span class="hljs-comment">/* Multiple backgrounds */</span>
+<span class="hljs-selector-tag">background</span>: 
+  <span class="hljs-selector-tag">linear-gradient</span>(<span class="hljs-selector-tag">rgba</span>(0,0,0,0<span class="hljs-selector-class">.5</span>), <span class="hljs-selector-tag">rgba</span>(0,0,0,0<span class="hljs-selector-class">.5</span>)),
+  <span class="hljs-selector-tag">url</span>('<span class="hljs-selector-tag">image</span><span class="hljs-selector-class">.jpg</span>');
+</div></code></pre>
+<hr>
+<h2 id="responsive-design">Responsive Design</h2>
+<h3 id="media-queries">Media Queries</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Mobile First Approach (Recommended) */</span>
+<span class="hljs-comment">/* Base styles for mobile */</span>
+<span class="hljs-selector-class">.container</span> { <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>; }
+
+<span class="hljs-comment">/* Tablet */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width:</span> <span class="hljs-number">768px</span>) {
+  <span class="hljs-selector-class">.container</span> { <span class="hljs-attribute">width</span>: <span class="hljs-number">750px</span>; }
+}
+
+<span class="hljs-comment">/* Desktop */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width:</span> <span class="hljs-number">1024px</span>) {
+  <span class="hljs-selector-class">.container</span> { <span class="hljs-attribute">width</span>: <span class="hljs-number">1200px</span>; }
+}
+
+<span class="hljs-comment">/* Common Breakpoints */</span>
+<span class="hljs-comment">/* Mobile: 320px - 767px */</span>
+<span class="hljs-comment">/* Tablet: 768px - 1023px */</span>
+<span class="hljs-comment">/* Desktop: 1024px+ */</span>
+</div></code></pre>
+<h3 id="responsive-units">Responsive Units</h3>
+<table>
+<thead>
+<tr>
+<th>Unit</th>
+<th>Usage</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>px</code></td>
+<td>Fixed pixels</td>
+<td>Borders, small details</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Relative to parent</td>
+<td>Widths, layout proportions</td>
+</tr>
+<tr>
+<td><code>em</code></td>
+<td>Relative to element font-size</td>
+<td>Spacing related to text</td>
+</tr>
+<tr>
+<td><code>rem</code></td>
+<td>Relative to root font-size</td>
+<td><strong>Preferred for most spacing</strong></td>
+</tr>
+<tr>
+<td><code>vw/vh</code></td>
+<td>Viewport width/height</td>
+<td>Full-screen elements</td>
+</tr>
+<tr>
+<td><code>vmin/vmax</code></td>
+<td>Smaller/larger viewport dimension</td>
+<td>Square elements</td>
+</tr>
+<tr>
+<td><code>ch</code></td>
+<td>Character width</td>
+<td>Text-based sizing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>rem vs em Decision:</strong></p>
+<ul>
+<li><strong>rem</strong>: Consistent sizing throughout the site, easier to maintain</li>
+<li><strong>em</strong>: When you want scaling relative to the element's font size</li>
+</ul>
+<hr>
+<h2 id="animations-and-transitions">Animations and Transitions</h2>
+<h3 id="transitions">Transitions</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Basic transition */</span>
+<span class="hljs-selector-class">.button</span> {
+  <span class="hljs-attribute">transition</span>: background-color <span class="hljs-number">0.3s</span> ease;
+}
+
+<span class="hljs-comment">/* Multiple properties */</span>
+<span class="hljs-selector-class">.card</span> {
+  <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.3s</span> ease, box-shadow <span class="hljs-number">0.3s</span> ease;
+}
+
+<span class="hljs-comment">/* All properties */</span>
+<span class="hljs-selector-class">.element</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease;
+}
+</div></code></pre>
+<h3 id="animations">Animations</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Define keyframes */</span>
+<span class="hljs-keyword">@keyframes</span> slideIn {
+  <span class="hljs-selector-tag">from</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">100%</span>); }
+  <span class="hljs-selector-tag">to</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">0</span>); }
+}
+
+<span class="hljs-comment">/* Apply animation */</span>
+<span class="hljs-selector-class">.slide-element</span> {
+  <span class="hljs-attribute">animation</span>: slideIn <span class="hljs-number">0.5s</span> ease-out;
+}
+
+<span class="hljs-comment">/* Animation properties */</span>
+<span class="hljs-selector-class">.complex-animation</span> {
+  <span class="hljs-attribute">animation</span>: 
+    slideIn <span class="hljs-number">0.5s</span> ease-out,
+    fadeIn <span class="hljs-number">0.3s</span> ease-in <span class="hljs-number">0.2s</span> both;
+}
+</div></code></pre>
+<h3 id="transform-functions">Transform Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>translate()</code></td>
+<td>Move element</td>
+<td><code>transform: translate(10px, 20px)</code></td>
+</tr>
+<tr>
+<td><code>scale()</code></td>
+<td>Resize element</td>
+<td><code>transform: scale(1.2)</code></td>
+</tr>
+<tr>
+<td><code>rotate()</code></td>
+<td>Rotate element</td>
+<td><code>transform: rotate(45deg)</code></td>
+</tr>
+<tr>
+<td><code>skew()</code></td>
+<td>Skew element</td>
+<td><code>transform: skew(15deg)</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="modern-css-features">Modern CSS Features</h2>
+<h3 id="css-variables-custom-properties">CSS Variables (Custom Properties)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Define variables */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attribute">--primary-color</span>: <span class="hljs-number">#007bff</span>;
+  <span class="hljs-attribute">--font-size-large</span>: <span class="hljs-number">1.5rem</span>;
+  <span class="hljs-attribute">--spacing-unit</span>: <span class="hljs-number">8px</span>;
+}
+
+<span class="hljs-comment">/* Use variables */</span>
+<span class="hljs-selector-class">.button</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">var</span>(--primary-color);
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-built_in">var</span>(--font-size-large);
+  <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(var(--spacing-unit) * <span class="hljs-number">2</span>);
+}
+</div></code></pre>
+<h3 id="css-functions">CSS Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>calc()</code></td>
+<td>Mathematical calculations</td>
+<td><code>width: calc(100% - 20px)</code></td>
+</tr>
+<tr>
+<td><code>min()</code></td>
+<td>Minimum value</td>
+<td><code>width: min(100%, 600px)</code></td>
+</tr>
+<tr>
+<td><code>max()</code></td>
+<td>Maximum value</td>
+<td><code>font-size: max(1rem, 4vw)</code></td>
+</tr>
+<tr>
+<td><code>clamp()</code></td>
+<td>Constrained value</td>
+<td><code>font-size: clamp(1rem, 4vw, 2rem)</code></td>
+</tr>
+<tr>
+<td><code>var()</code></td>
+<td>CSS variables</td>
+<td><code>color: var(--text-color, black)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="container-queries-modern">Container Queries (Modern)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Container query */</span>
+<span class="hljs-selector-class">.card</span> {
+  <span class="hljs-attribute">container-type</span>: inline-size;
+}
+
+<span class="hljs-keyword">@container</span> (<span class="hljs-attribute">min-width:</span> <span class="hljs-number">300px</span>) {
+  <span class="hljs-selector-class">.card-content</span> {
+    <span class="hljs-attribute">display</span>: flex;
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="key-principles">Key Principles</h2>
+<h3 id="1-specificity">1. Specificity</h3>
+<p>CSS specificity determines which styles apply when multiple rules target the same element.</p>
+<p><strong>Specificity Weight (highest to lowest):</strong></p>
+<ol>
+<li>Inline styles (<code>style=&quot;...&quot;</code>) - 1000 points</li>
+<li>IDs (<code>#header</code>) - 100 points</li>
+<li>Classes, attributes, pseudo-classes (<code>.button</code>, <code>[type=&quot;text&quot;]</code>, <code>:hover</code>) - 10 points</li>
+<li>Elements and pseudo-elements (<code>div</code>, <code>::before</code>) - 1 point</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Examples */</span>
+<span class="hljs-selector-tag">div</span> { <span class="hljs-attribute">color</span>: black; }                    <span class="hljs-comment">/* Specificity: 1 */</span>
+<span class="hljs-selector-class">.text</span> { <span class="hljs-attribute">color</span>: blue; }                    <span class="hljs-comment">/* Specificity: 10 */</span>
+<span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.text</span> { <span class="hljs-attribute">color</span>: green; }               <span class="hljs-comment">/* Specificity: 11 */</span>
+<span class="hljs-selector-id">#header</span> <span class="hljs-selector-class">.text</span> { <span class="hljs-attribute">color</span>: red; }            <span class="hljs-comment">/* Specificity: 110 */</span>
+</div></code></pre>
+<p><strong>Best Practice:</strong> Keep specificity low, avoid <code>!important</code></p>
+<h3 id="2-cascade">2. Cascade</h3>
+<p>When specificity is equal, the last rule in the source code wins.</p>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.button</span> { <span class="hljs-attribute">color</span>: blue; }
+<span class="hljs-selector-class">.button</span> { <span class="hljs-attribute">color</span>: red; }  <span class="hljs-comment">/* This wins */</span>
+</div></code></pre>
+<h3 id="3-inheritance">3. Inheritance</h3>
+<p>Some properties inherit from parent to child elements.</p>
+<p><strong>Properties that inherit:</strong> <code>color</code>, <code>font-family</code>, <code>font-size</code>, <code>line-height</code>, <code>text-align</code>
+<strong>Properties that don't inherit:</strong> <code>margin</code>, <code>padding</code>, <code>border</code>, <code>background</code>, <code>width</code>, <code>height</code></p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Force inheritance */</span>
+<span class="hljs-selector-class">.child</span> { <span class="hljs-attribute">color</span>: inherit; }
+
+<span class="hljs-comment">/* Prevent inheritance */</span>
+<span class="hljs-selector-class">.child</span> { <span class="hljs-attribute">color</span>: initial; }
+</div></code></pre>
+<h3 id="4-box-model">4. Box Model</h3>
+<p>Every element is a rectangular box with content, padding, border, and margin.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Visual box model debugging */</span>
+* {
+  <span class="hljs-attribute">outline</span>: <span class="hljs-number">1px</span> solid red;
+}
+</div></code></pre>
+<h3 id="5-mobile-first-design">5. Mobile-First Design</h3>
+<p>Start with mobile styles, then enhance for larger screens.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Mobile first */</span>
+<span class="hljs-selector-class">.container</span> { 
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>; 
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+}
+
+<span class="hljs-comment">/* Enhance for larger screens */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width:</span> <span class="hljs-number">768px</span>) {
+  <span class="hljs-selector-class">.container</span> { 
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">2rem</span>; 
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="essential-css-terms">Essential CSS Terms</h2>
+<h3 id="layout-terms">Layout Terms</h3>
+<ul>
+<li><strong>Normal Flow</strong>: Default document layout where elements stack vertically</li>
+<li><strong>Containing Block</strong>: The reference box for positioning and sizing calculations</li>
+<li><strong>Stacking Context</strong>: 3D layering of elements (z-index behavior)</li>
+<li><strong>Block Formatting Context (BFC)</strong>: Independent layout environment</li>
+<li><strong>Intrinsic vs Extrinsic Sizing</strong>: Content-based vs explicit sizing</li>
+</ul>
+<h3 id="modern-development-terms">Modern Development Terms</h3>
+<ul>
+<li><strong>CSS-in-JS</strong>: Writing CSS within JavaScript (styled-components, emotion)</li>
+<li><strong>Utility-First CSS</strong>: Small, single-purpose classes (Tailwind CSS)</li>
+<li><strong>CSS Modules</strong>: Locally scoped CSS</li>
+<li><strong>PostCSS</strong>: Tool for transforming CSS with JavaScript</li>
+<li><strong>CSS Houdini</strong>: Low-level APIs for extending CSS</li>
+<li><strong>Logical Properties</strong>: Direction-agnostic properties (<code>margin-inline-start</code> vs <code>margin-left</code>)</li>
+</ul>
+<h3 id="performance-terms">Performance Terms</h3>
+<ul>
+<li><strong>Critical CSS</strong>: Above-the-fold styles loaded immediately</li>
+<li><strong>CSS Containment</strong>: Isolating parts of the page for better performance</li>
+<li><strong>Will-change</strong>: Hint to browser about upcoming changes</li>
+<li><strong>Paint, Layout, Composite</strong>: Browser rendering phases</li>
+</ul>
+<h3 id="methodology-terms">Methodology Terms</h3>
+<ul>
+<li><strong>BEM</strong>: Block Element Modifier naming convention</li>
+<li><strong>OOCSS</strong>: Object-Oriented CSS</li>
+<li><strong>SMACSS</strong>: Scalable and Modular Architecture for CSS</li>
+<li><strong>Atomic CSS</strong>: Single-purpose utility classes</li>
+</ul>
+<hr>
+<h2 id="common-gotchas-and-solutions">Common Gotchas and Solutions</h2>
+<h3 id="margin-collapse">Margin Collapse</h3>
+<p>Adjacent vertical margins combine into a single margin.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Problem */</span>
+<span class="hljs-selector-class">.box1</span> { <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>; }
+<span class="hljs-selector-class">.box2</span> { <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">30px</span>; }
+<span class="hljs-comment">/* Actual gap is 30px, not 50px */</span>
+
+<span class="hljs-comment">/* Solutions */</span>
+<span class="hljs-selector-class">.container</span> { <span class="hljs-attribute">overflow</span>: hidden; } <span class="hljs-comment">/* Create BFC */</span>
+<span class="hljs-selector-class">.container</span> { <span class="hljs-attribute">display</span>: flex; }    <span class="hljs-comment">/* Flexbox prevents collapse */</span>
+</div></code></pre>
+<h3 id="centering-solutions">Centering Solutions</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Horizontal centering */</span>
+<span class="hljs-selector-class">.center-horizontal</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;  <span class="hljs-comment">/* Block elements with defined width */</span>
+  <span class="hljs-attribute">text-align</span>: center;  <span class="hljs-comment">/* Inline elements */</span>
+}
+
+<span class="hljs-comment">/* Vertical centering */</span>
+<span class="hljs-selector-class">.center-vertical</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;  <span class="hljs-comment">/* Flexbox */</span>
+}
+
+<span class="hljs-comment">/* Both directions */</span>
+<span class="hljs-selector-class">.center-both</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+}
+</div></code></pre>
+<h3 id="clearfix-for-legacy-floats">Clearfix (for legacy floats)</h3>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.clearfix</span><span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;
+  <span class="hljs-attribute">display</span>: table;
+  <span class="hljs-attribute">clear</span>: both;
+}
+</div></code></pre>
+<p>This cheat sheet covers the essential CSS knowledge for modern web development. Keep it handy for quick reference during development!</p>
+
+</body>
+</html>

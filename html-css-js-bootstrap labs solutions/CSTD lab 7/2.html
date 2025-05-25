@@ -1,0 +1,371 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task2</title>
+    <style>
+      .container {
+        margin: 10px auto;
+        width: 1500px;
+      }
+      .form {
+        width: 1400px;
+      }
+      .error {
+        margin-left: 10px;
+        color: red;
+        display: none;
+      }
+      .input-wrapper {
+        margin: 10px 0;
+      }
+      div > label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      onload = function () {
+        // helper functions
+        function showError(errorClass) {
+          document.querySelector(`.${errorClass}`).style.display =
+            "inline-block";
+        }
+
+        function hideError(errorClass) {
+          document.querySelector(`.${errorClass}`).style.display = "none";
+        }
+
+        // Components constructor functions
+        function NameInputComponent() {
+          // attributes
+          const element = document.querySelector('input[name="name"]');
+          const errorClass = "invalid-name";
+
+          // events
+          element.addEventListener("blur", (e) => this.checkState());
+          element.addEventListener("keydown", (e) => hideError(errorClass));
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+          this.getErrorClass = function () {
+            return errorClass;
+          };
+          this.getValue = function () {
+            return element.value.trim();
+          };
+
+          this.validateValue = function () {
+            return /^[A-Za-z]{2,}$/.test(this.getValue());
+          };
+
+          this.checkState = function () {
+            if (!this.validateValue()) {
+              showError(errorClass);
+              element.focus();
+              return false;
+            } else {
+              hideError(errorClass);
+              return true;
+            }
+          };
+        }
+
+        function EmailInputComponent() {
+          // attributes
+          const element = document.querySelector('input[name="email"]');
+          const errorClass = "invalid-email";
+
+          // events
+          element.addEventListener("blur", (e) => this.checkState());
+          element.addEventListener("keydown", (e) => hideError(errorClass));
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+          this.getErrorClass = function () {
+            return errorClass;
+          };
+          this.getValue = function () {
+            return element.value.trim();
+          };
+
+          this.validateValue = function () {
+            return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
+              this.getValue()
+            );
+          };
+
+          this.checkState = function () {
+            if (!this.validateValue()) {
+              showError(errorClass);
+              element.focus();
+              return false;
+            } else {
+              hideError(errorClass);
+              return true;
+            }
+          };
+        }
+
+        function CountryInputComponent() {
+          // attributes
+          const element = document.querySelector("#country");
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+
+          this.getValue = function () {
+            return element.value.trim();
+          };
+        }
+
+        function ZipCodeInputComponent() {
+          // attributes
+          const element = document.querySelector('input[name="zip"]');
+          const errorClass = "invalid-zip";
+          const zipCodes = {
+            egypt: "1111",
+            england: "2222",
+            usa: "3333",
+            syria: "4444",
+          };
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+
+          this.getValue = function () {
+            return element.value.trim();
+          };
+
+          this.setValue = function (countryName) {
+            if (!zipCodes[countryName]) {
+              return undefined;
+            } else {
+              element.value = zipCodes[countryName];
+              return element.value;
+            }
+          };
+        }
+
+        function HoppiesInputComponent() {
+          // attributes
+          const element = document.querySelectorAll('input[name="hoppies"]');
+          const errorClass = "invalid-hoppies";
+
+          // events
+          element.forEach((checkbox) =>
+            checkbox.addEventListener("click", (e) => hideError(errorClass))
+          );
+
+          // methods
+          function collectHoppies() {
+            var hoppiesValues = [];
+            for (var hoppy of element) {
+              if (hoppy.checked) {
+                hoppiesValues.push(hoppy.value);
+              }
+            }
+            return hoppiesValues;
+          }
+
+          this.getElement = function () {
+            return element;
+          };
+          this.getErrorClass = function () {
+            return errorClass;
+          };
+          this.getValue = function () {
+            return collectHoppies();
+          };
+
+          this.validateValue = function () {
+            return this.getValue().length > 0;
+          };
+
+          this.checkState = function () {
+            if (!this.validateValue()) {
+              showError(errorClass);
+              return false;
+            } else {
+              hideError(errorClass);
+              return true;
+            }
+          };
+        }
+
+        function SubmitBtnComponent({
+          nameInputComponent,
+          emailInputComponent,
+          countryInputComponent,
+          zipCodeInputComponent,
+          hoppiesInputComponent,
+        }) {
+          // attributes
+          const element = document.querySelector('input[type="submit"]');
+
+          // events
+          element.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            if (!nameInputComponent.checkState()) {
+              return;
+            }
+            const name = nameInputComponent.getValue();
+            if (!emailInputComponent.checkState()) {
+              return;
+            }
+            const email = emailInputComponent.getValue();
+
+            const country = countryInputComponent.getValue();
+            const zip = zipCodeInputComponent.getValue();
+            if (!hoppiesInputComponent.checkState()) {
+              return;
+            }
+            const hoppies = hoppiesInputComponent.getValue();
+
+            // If all validations pass, redirect to the new page
+            window.location.replace("./task2-1.html");
+          });
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+
+          this.getValue = function () {
+            return element.value.trim();
+          };
+        }
+
+        function ResetBtnComponent() {
+          const element = document.querySelector('input[type="reset"]');
+
+          // events
+          element.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (confirm("Are your sure?")) {
+              document.forms[0].reset();
+            }
+          });
+
+          // methods
+          this.getElement = function () {
+            return element;
+          };
+        }
+
+        // page components
+        const nameInputComponent = new NameInputComponent();
+        const emailInputComponent = new EmailInputComponent();
+        const countryInputComponent = new CountryInputComponent();
+        const zipCodeInputComponent = new ZipCodeInputComponent();
+        const hoppiesInputComponent = new HoppiesInputComponent();
+        const submitBtnComponent = new SubmitBtnComponent({
+          nameInputComponent,
+          emailInputComponent,
+          countryInputComponent,
+          zipCodeInputComponent,
+          hoppiesInputComponent,
+        });
+        const resetBtnComponent = new ResetBtnComponent();
+
+        // global events
+        nameInputComponent.getElement().focus();
+        countryInputComponent
+          .getElement()
+          .addEventListener("change", function (e) {
+            const countryName = countryInputComponent.getValue();
+            zipCodeInputComponent.setValue(countryName);
+          });
+      };
+    </script>
+    <div class="container">
+      <form action="#">
+        <div class="input-wrapper">
+          <label for="username"> Name: </label>
+          <input
+            type="text"
+            name="name"
+            id="username"
+            placeholder="Enter your Full name"
+          />
+          <span class="error invalid-name"
+            >Please Enter a valid name (name must be at lest 2 characters)</span
+          >
+        </div>
+        <div class="input-wrapper">
+          <label for="country">Country:</label>
+          <select name="country" id="country">
+            <option value="egypt">Egypt</option>
+            <option value="england">England</option>
+            <option value="usa">USA</option>
+            <option value="syria">Syria</option>
+          </select>
+        </div>
+        <div class="input-wrapper">
+          <label for="zip">Zip:</label>
+          <input type="text" name="zip" value="1111" />
+          <span class="error invalid-zip">Please Enter a valid zip code</span>
+        </div>
+        <div class="input-wrapper">
+          <label for="email">Email:</label>
+          <input type="text" name="email" />
+          <span class="error invalid-email">Please Enter a valid email</span>
+        </div>
+        <div class="input-wrapper">
+          <label for="hoppies">Hoppies:</label>
+          <span class="hoppy-wrapper">
+            <input
+              type="checkbox"
+              name="hoppies"
+              value="writing"
+              id="writing"
+            />
+            <label for="writing">writing</label>
+          </span>
+          <span class="hoppy-wrapper">
+            <input
+              type="checkbox"
+              name="hoppies"
+              value="reading"
+              id="reading"
+            />
+            <label for="reading">reading</label>
+          </span>
+          <span class="hoppy-wrapper">
+            <input
+              type="checkbox"
+              name="hoppies"
+              value="swimming"
+              id="swimming"
+            />
+            <label for="swimming">swimming</label>
+          </span>
+          <span class="hoppy-wrapper">
+            <input
+              type="checkbox"
+              name="hoppies"
+              value="sleeping"
+              id="sleeping"
+            />
+            <label for="sleeping">sleeping</label>
+          </span>
+          <span class="error invalid-hoppies"
+            >You must select at least on hoppy!</span
+          >
+        </div>
+        <input type="submit" value="Register" />
+        <input type="reset" value="clear" />
+      </form>
+    </div>
+  </body>
+</html>

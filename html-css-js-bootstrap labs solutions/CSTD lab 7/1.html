@@ -1,0 +1,326 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task1</title>
+    <style>
+      /* body styles*/
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* container styles*/
+      .container {
+        margin: 50px auto;
+        width: 1200px;
+        background-color: #ced4da;
+        padding: 30px;
+        font-size: 20px;
+        border-radius: 20px;
+      }
+
+      /*Form styles*/
+      .news-types-wrapper label,
+      .news-search-wrapper label {
+        font-weight: bold;
+      }
+
+      .news-types-wrapper input[type="radio"] {
+        accent-color: blue;
+      }
+
+      form div {
+        margin-bottom: 12px;
+      }
+
+      .add-news-title-wrapper input[type="text"],
+      .news-search-wrapper input[type="text"] {
+        width: 400px;
+        font-size: 20px;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .add-news-title-wrapper input[type="submit"] {
+        font-size: 20px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5%;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .error {
+        margin-left: 10px;
+        color: red;
+        display: none;
+      }
+
+      /* Table styles */
+      table {
+        margin: 10px auto;
+        width: 100%;
+      }
+      thead {
+        background-color: #adb5bd;
+      }
+      th,
+      td {
+        padding: 5px 10px;
+        text-align: center;
+      }
+      table .social {
+        background-color: #74c0fc;
+      }
+      table .sport {
+        background-color: #63e6be;
+      }
+      table .politic {
+        background-color: #ffa8a8;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      onload = function () {
+        // helper functions
+        function showError(errorClass) {
+          document.querySelector(`.${errorClass}`).style.display =
+            "inline-block";
+        }
+
+        function hideError(errorClass) {
+          document.querySelector(`.${errorClass}`).style.display = "none";
+        }
+
+        // Constructor functions
+        function NewsArticle(title, type) {
+          this.title = title;
+          this.type = type;
+        }
+        function NewsTableComponent() {
+          const tableElement = document.querySelector("table");
+          const tableBody = document.querySelector("tbody");
+
+          function renderNewsArticle(newsArticle, rowId) {
+            return `<tr class="${newsArticle.type}">
+            <td>${rowId}</td>
+            <td>${newsArticle.title}</td>
+            <td>${newsArticle.type}</td>
+          </tr>`;
+          }
+
+          this.render = function (newsArticles) {
+            tableBody.innerHTML = newsArticles
+              .map((article, index) => renderNewsArticle(article, index))
+              .join("");
+          };
+        }
+        function NewsTypesComponent() {
+          const radioBtns = document.querySelectorAll(
+            '.news-types-wrapper input[type="radio"]'
+          );
+          const errorClass = "invalid-news-type";
+
+          // events
+          radioBtns.forEach((ele) => {
+            ele.addEventListener("click", (e) => {
+              hideError(errorClass);
+            });
+          });
+
+          // methods
+          this.getErrorClass = function () {
+            return errorClass;
+          };
+
+          this.getValue = function () {
+            for (var radioBtn of radioBtns) {
+              if (radioBtn.checked) {
+                return radioBtn.value.trim();
+              }
+            }
+          };
+
+          this.validateValue = function () {
+            return this.getValue() != undefined;
+          };
+
+          this.checkState = function () {
+            if (this.validateValue()) {
+              hideError(errorClass);
+              return true;
+            } else {
+              showError(errorClass);
+              return false;
+            }
+          };
+        }
+        function NewsTitleInputComponent() {
+          const newsTitleInput = document.querySelector(
+            'input[name="newsTitle"]'
+          );
+          const errorClass = "invalid-news-title";
+
+          // events
+          newsTitleInput.addEventListener("keydown", (e) => {
+            hideError(errorClass);
+          });
+
+          // methods
+          this.getValue = function () {
+            return newsTitleInput.value.trim();
+          };
+
+          this.getErrorClass = function () {
+            return errorClass;
+          };
+
+          this.validateValue = function () {
+            return this.getValue().length > 0;
+          };
+
+          this.checkState = function () {
+            if (this.validateValue()) {
+              hideError(errorClass);
+              return true;
+            } else {
+              showError(errorClass);
+              return false;
+            }
+          };
+        }
+        function AddNewsBtnComponent({
+          newsArticles,
+          newsTableComponent,
+          newsTypesComponent,
+          newsTitleInputComponent,
+        }) {
+          const btn = document.querySelector(
+            '.add-news-title-wrapper input[type="submit"]'
+          );
+
+          // events
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (!newsTypesComponent.checkState()) {
+              return;
+            }
+            const newsType = newsTypesComponent.getValue();
+
+            if (!newsTitleInputComponent.checkState()) {
+              return;
+            }
+            const newsTile = newsTitleInputComponent.getValue();
+
+            // add news article
+            newsArticles.push(new NewsArticle(newsTile, newsType));
+
+            // rerender table
+            newsTableComponent.render(newsArticles);
+
+            // reset form
+            document.forms[0].reset();
+          });
+        }
+        function SearchNewsComponent({ newsArticles, newsTableComponent }) {
+          const searchInput = document.querySelector("#news-search");
+
+          function searchForNews(searchValue) {
+            return newsArticles.filter((article) =>
+              article.title.toLowerCase().includes(searchValue)
+            );
+          }
+
+          // events
+          searchInput.addEventListener("keydown", (e) => {
+            newsTableComponent.render(searchForNews(e.target.value));
+          });
+        }
+
+        const newsArticles = [];
+        const newsTableComponent = new NewsTableComponent();
+        const newsTypesComponent = new NewsTypesComponent();
+        const newsTitleInputComponent = new NewsTitleInputComponent();
+        const addNewsBtnComponent = new AddNewsBtnComponent({
+          newsArticles,
+          newsTableComponent,
+          newsTypesComponent,
+          newsTitleInputComponent,
+        });
+        const searchNewsComponent = new SearchNewsComponent({
+          newsArticles,
+          newsTableComponent,
+        });
+
+        // global events
+        newsTableComponent.render(newsArticles);
+      };
+    </script>
+    <div class="container">
+      <form action="#">
+        <div class="add-news-wrapper">
+          <div class="news-types-wrapper">
+            <label for="">news Type:</label>
+            <span class="news-type-wrapper">
+              <input
+                type="radio"
+                name="newsType"
+                value="sport"
+                id="sport-type"
+              />
+              <label for="sport-type">sport</label>
+            </span>
+            <span class="news-type-wrapper">
+              <input
+                type="radio"
+                name="newsType"
+                value="social"
+                id="social-type"
+              />
+              <label for="social-type">social</label>
+            </span>
+            <span class="news-type-wrapper">
+              <input
+                type="radio"
+                name="newsType"
+                value="politic"
+                id="politic-type"
+              />
+              <label for="politic-type">politic</label>
+            </span>
+            <span class="error invalid-news-type"
+              >Please select newsTypes!</span
+            >
+          </div>
+        </div>
+        <div class="add-news-title-wrapper">
+          <input
+            type="text"
+            placeholder="Add news title here"
+            name="newsTitle"
+          />
+          <input type="submit" value="Add" />
+          <span class="error invalid-news-title"
+            >News title must be at least 1 character!</span
+          >
+        </div>
+        <div class="news-search-wrapper">
+          <label for="news-search">search: </label>
+          <input type="text" placeholder="Search news here" id="news-search" />
+        </div>
+      </form>
+      <table>
+        <thead>
+          <th>id</th>
+          <th>newsTitle</th>
+          <th>type</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>

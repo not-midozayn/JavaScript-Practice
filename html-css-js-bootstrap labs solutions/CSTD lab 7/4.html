@@ -1,0 +1,305 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task3</title>
+    <style>
+      .container {
+        margin: 30px auto;
+      }
+      p {
+        padding: 20px;
+      }
+      table {
+        border: solid 2px black;
+      }
+      td,
+      th {
+        border: solid 2px black;
+        padding: 5px;
+        /* font-family: Georgia, "Times New Roman", Times, serif; */
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        document.querySelectorAll('input[type="radio"]').forEach((ele) => {
+          ele.addEventListener("click", function (e) {
+            document.querySelector("p").style[this.name] = this.value;
+          });
+        });
+      };
+    </script>
+    <div class="container">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit magnam
+        rem, fuga, enim pariatur perspiciatis impedit molestias quos quo nostrum
+        facilis recusandae harum reprehenderit, veniam maxime laudantium
+        repellat numquam animi.
+      </p>
+      <form action="#">
+        <table>
+          <thead>
+            <th>fontFamily</th>
+            <th>textAlign</th>
+            <th>lineHeight</th>
+            <th>letterSpacing</th>
+            <th>textIndent</th>
+            <th>textTransform</th>
+            <th>textDecoration</th>
+            <th>textBorder</th>
+            <th>Bordercolor</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div>
+                  <input type="radio" name="fontFamily" value="arial" /><label
+                    for=""
+                    >arial</label
+                  >
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="fontFamily"
+                    value="Courier New"
+                  /><label for="">courier</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="fontFamily"
+                    value="Times New Roman"
+                  /><label for="">times</label>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="textAlign" value="left" /><label
+                    for=""
+                    >left</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textAlign" value="right" /><label
+                    for=""
+                    >right</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textAlign" value="center" /><label
+                    for=""
+                    >center</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textAlign" value="justify" /><label
+                    for=""
+                    >justify</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="lineHeight" value="normal" /><label
+                    for=""
+                    >normal</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="lineHeight" value="10px" /><label
+                    for=""
+                    >10px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="lineHeight" value="15px" /><label
+                    for=""
+                    >15px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="lineHeight" value="1.5" /><label
+                    for=""
+                    >1.5</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    type="radio"
+                    name="letterSpacing"
+                    value="normal"
+                  /><label for="">normal</label>
+                </div>
+                <div>
+                  <input type="radio" name="letterSpacing" value="-1px" /><label
+                    for=""
+                    >-1px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="letterSpacing" value="2px" /><label
+                    for=""
+                    >2px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="letterSpacing" value="3px" /><label
+                    for=""
+                    >3px</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="textIndent" value="0px" /><label
+                    for=""
+                    >0px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textIndent" value="5px" /><label
+                    for=""
+                    >5px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textIndent" value="15px" /><label
+                    for=""
+                    >15px</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="textIndent" value="25px" /><label
+                    for=""
+                    >25px</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="textTransform" value="none" /><label
+                    for=""
+                    >none</label
+                  >
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textTransform"
+                    value="capitalize"
+                  /><label for="">capitalize</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textTransform"
+                    value="uppercase"
+                  /><label for="">uppercase</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textTransform"
+                    value="lowercase"
+                  /><label for="">lowercase</label>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    type="radio"
+                    name="textDecoration"
+                    value="none"
+                  /><label for="">none</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textDecoration"
+                    value="line-through"
+                  /><label for="">line-through</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textDecoration"
+                    value="overline"
+                  /><label for="">overline</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="textDecoration"
+                    value="underline"
+                  /><label for="">underline</label>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="border" value="none" /><label for=""
+                    >none</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="border" value="dotted" /><label
+                    for=""
+                    >dotted</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="border" value="double" /><label
+                    for=""
+                    >double</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="border" value="groove" /><label
+                    for=""
+                    >groove</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="border" value="dashed" /><label
+                    for=""
+                    >dashed</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div>
+                  <input type="radio" name="borderColor" value="white" /><label
+                    for=""
+                    >none</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="borderColor" value="red" /><label
+                    for=""
+                    >red</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="borderColor" value="green" /><label
+                    for=""
+                    >green</label
+                  >
+                </div>
+                <div>
+                  <input type="radio" name="borderColor" value="blue" /><label
+                    for=""
+                    >blue</label
+                  >
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

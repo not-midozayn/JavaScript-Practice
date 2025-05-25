@@ -21,14 +21,6 @@ if (true) {
 }
 // blockScoped is not accessible here
 ```
-
-
-
-
-
-
-
-
 ## 2. Functions
 
 ### Arrow Functions vs Regular Functions

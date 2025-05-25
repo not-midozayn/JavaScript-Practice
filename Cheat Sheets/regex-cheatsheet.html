@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>regex-cheatsheet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="javascript-regex-cheat-sheet-for-senior-engineers">JavaScript Regex Cheat Sheet for Senior Engineers</h1>
+<h2 id="basic-components">Basic Components</h2>
+<h3 id="literal-characters">Literal Characters</h3>
+<p>Characters that match themselves exactly.</p>
+<p><strong>Example 1: Simple Text Match</strong></p>
+<pre class="hljs"><code><div>/cat/
+</div></code></pre>
+<p><strong>Translation:</strong> Match the exact sequence &quot;cat&quot;
+<strong>Reasoning:</strong> Direct character matching - finds &quot;cat&quot; anywhere in the string
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;I have a cat&quot;</code> ✅ <strong>Match</strong> - Contains &quot;cat&quot; as substring</li>
+<li><code>&quot;I have a dog&quot;</code> ❌ <strong>No Match</strong> - Does not contain &quot;cat&quot;</li>
+</ul>
+<h3 id="anchors">Anchors</h3>
+<h4 id="start-of-string"><code>^</code> - Start of String</h4>
+<p><strong>Example 2: Start Anchor</strong></p>
+<pre class="hljs"><code><div>/^Hello/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;Hello&quot; only at the beginning of the string
+<strong>Reasoning:</strong> <code>^</code> asserts position at start of string
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;Hello world&quot;</code> ✅ <strong>Match</strong> - &quot;Hello&quot; is at the start</li>
+<li><code>&quot;Say Hello&quot;</code> ❌ <strong>No Match</strong> - &quot;Hello&quot; is not at the start</li>
+</ul>
+<h4 id="end-of-string"><code>$</code> - End of String</h4>
+<p><strong>Example 3: End Anchor</strong></p>
+<pre class="hljs"><code><div>/world$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;world&quot; only at the end of the string
+<strong>Reasoning:</strong> <code>$</code> asserts position at end of string
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;Hello world&quot;</code> ✅ <strong>Match</strong> - &quot;world&quot; is at the end</li>
+<li><code>&quot;world peace&quot;</code> ❌ <strong>No Match</strong> - &quot;world&quot; is not at the end</li>
+</ul>
+<h3 id="character-classes">Character Classes</h3>
+<h4 id="character-set"><code>[...]</code> - Character Set</h4>
+<p><strong>Example 4: Vowel Matching</strong></p>
+<pre class="hljs"><code><div>/b[aeiou]t/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;b&quot; followed by any vowel, followed by &quot;t&quot;
+<strong>Reasoning:</strong> <code>[aeiou]</code> matches exactly one character from the set
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;bat&quot;</code> ✅ <strong>Match</strong> - &quot;a&quot; is in the vowel set</li>
+<li><code>&quot;but&quot;</code> ✅ <strong>Match</strong> - &quot;u&quot; is in the vowel set</li>
+<li><code>&quot;bxt&quot;</code> ❌ <strong>No Match</strong> - &quot;x&quot; is not a vowel</li>
+</ul>
+<h4 id="negated-character-set"><code>[^...]</code> - Negated Character Set</h4>
+<p><strong>Example 5: Non-Digit After Letter</strong></p>
+<pre class="hljs"><code><div>/a[^<span class="hljs-number">0</span><span class="hljs-number">-9</span>]b/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;a&quot; followed by any non-digit, followed by &quot;b&quot;
+<strong>Reasoning:</strong> <code>[^0-9]</code> matches any character except digits 0-9
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;axb&quot;</code> ✅ <strong>Match</strong> - &quot;x&quot; is not a digit</li>
+<li><code>&quot;a5b&quot;</code> ❌ <strong>No Match</strong> - &quot;5&quot; is a digit</li>
+</ul>
+<h3 id="predefined-character-classes">Predefined Character Classes</h3>
+<h4 id="d---digits"><code>\d</code> - Digits</h4>
+<p><strong>Example 6: Basic Digit Match</strong></p>
+<pre class="hljs"><code><div>/\d{<span class="hljs-number">3</span>}/
+</div></code></pre>
+<p><strong>Translation:</strong> Match exactly 3 consecutive digits
+<strong>Reasoning:</strong> <code>\d</code> matches [0-9], <code>{3}</code> specifies exact count
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;ID: 123&quot;</code> ✅ <strong>Match</strong> - Contains &quot;123&quot; (3 digits)</li>
+<li><code>&quot;ID: 12&quot;</code> ❌ <strong>No Match</strong> - Only 2 digits, need exactly 3</li>
+</ul>
+<h4 id="w---word-characters"><code>\w</code> - Word Characters</h4>
+<p><strong>Example 7: Word Character Match</strong></p>
+<pre class="hljs"><code><div>/\w{<span class="hljs-number">5</span>}/
+</div></code></pre>
+<p><strong>Translation:</strong> Match exactly 5 consecutive word characters
+<strong>Reasoning:</strong> <code>\w</code> matches [a-zA-Z0-9_], useful for identifiers
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;user_123&quot;</code> ✅ <strong>Match</strong> - &quot;user_&quot; is 5 word characters</li>
+<li><code>&quot;hi-there&quot;</code> ❌ <strong>No Match</strong> - Contains hyphen (not a word character)</li>
+</ul>
+<h4 id="s---whitespace"><code>\s</code> - Whitespace</h4>
+<p><strong>Example 8: Word Separator</strong></p>
+<pre class="hljs"><code><div>/\w+\s\w+<span class="hljs-regexp">/
+</span></div></code></pre>
+<p><strong>Translation:</strong> Match one or more word characters, whitespace, then one or more word characters
+<strong>Reasoning:</strong> <code>\w+</code> matches word sequences, <code>\s</code> matches space/tab/newline
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;hello world&quot;</code> ✅ <strong>Match</strong> - Two words separated by space</li>
+<li><code>&quot;helloworld&quot;</code> ❌ <strong>No Match</strong> - No whitespace separator</li>
+</ul>
+<h3 id="quantifiers">Quantifiers</h3>
+<h4 id="zero-or-more"><code>*</code> - Zero or More</h4>
+<p><strong>Example 9: Optional Repeated Character</strong></p>
+<pre class="hljs"><code><div>/bo*k/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;b&quot; followed by zero or more &quot;o&quot;s, followed by &quot;k&quot;
+<strong>Reasoning:</strong> <code>*</code> allows the preceding element to appear 0 or more times
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;bk&quot;</code> ✅ <strong>Match</strong> - Zero &quot;o&quot;s is valid</li>
+<li><code>&quot;book&quot;</code> ✅ <strong>Match</strong> - Two &quot;o&quot;s is valid</li>
+<li><code>&quot;bak&quot;</code> ❌ <strong>No Match</strong> - &quot;a&quot; is not &quot;o&quot;</li>
+</ul>
+<h4 id="one-or-more"><code>+</code> - One or More</h4>
+<p><strong>Example 10: Required Repeated Character</strong></p>
+<pre class="hljs"><code><div>/go+d/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;g&quot; followed by one or more &quot;o&quot;s, followed by &quot;d&quot;
+<strong>Reasoning:</strong> <code>+</code> requires at least one occurrence of the preceding element
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;good&quot;</code> ✅ <strong>Match</strong> - Two &quot;o&quot;s (≥1)</li>
+<li><code>&quot;god&quot;</code> ✅ <strong>Match</strong> - One &quot;o&quot; (≥1)</li>
+<li><code>&quot;gd&quot;</code> ❌ <strong>No Match</strong> - Zero &quot;o&quot;s (needs ≥1)</li>
+</ul>
+<h4 id="zero-or-one-optional"><code>?</code> - Zero or One (Optional)</h4>
+<p><strong>Example 11: Optional Character</strong></p>
+<pre class="hljs"><code><div>/colou?r/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;colo&quot; followed by optional &quot;u&quot;, followed by &quot;r&quot;
+<strong>Reasoning:</strong> <code>?</code> makes the preceding element optional (0 or 1 occurrence)
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;color&quot;</code> ✅ <strong>Match</strong> - No &quot;u&quot; (0 occurrences)</li>
+<li><code>&quot;colour&quot;</code> ✅ <strong>Match</strong> - One &quot;u&quot; (1 occurrence)</li>
+<li><code>&quot;colouur&quot;</code> ❌ <strong>No Match</strong> - Two &quot;u&quot;s (more than 1)</li>
+</ul>
+<h4 id="n---exact-count"><code>{n}</code> - Exact Count</h4>
+<p><strong>Example 12: Phone Number Pattern</strong></p>
+<pre class="hljs"><code><div>/\d{<span class="hljs-number">3</span>}-\d{<span class="hljs-number">3</span>}-\d{<span class="hljs-number">4</span>}/
+</div></code></pre>
+<p><strong>Translation:</strong> Match 3 digits, hyphen, 3 digits, hyphen, 4 digits
+<strong>Reasoning:</strong> <code>{n}</code> specifies exact repetition count
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;123-456-7890&quot;</code> ✅ <strong>Match</strong> - Exact format with correct digit counts</li>
+<li><code>&quot;123-45-7890&quot;</code> ❌ <strong>No Match</strong> - Middle section has 2 digits instead of 3</li>
+</ul>
+<h4 id="nm---range-count"><code>{n,m}</code> - Range Count</h4>
+<p><strong>Example 13: Password Length</strong></p>
+<pre class="hljs"><code><div>/^\w{<span class="hljs-number">8</span>,<span class="hljs-number">12</span>}$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match string containing only 8-12 word characters
+<strong>Reasoning:</strong> <code>{8,12}</code> allows 8 to 12 repetitions, anchors ensure entire string matches
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;password123&quot;</code> ✅ <strong>Match</strong> - 11 characters, within range</li>
+<li><code>&quot;pass&quot;</code> ❌ <strong>No Match</strong> - 4 characters, below minimum of 8</li>
+</ul>
+<h3 id="groups-and-alternation">Groups and Alternation</h3>
+<h4 id="capturing-groups"><code>(...)</code> - Capturing Groups</h4>
+<p><strong>Example 14: Date Extraction</strong></p>
+<pre class="hljs"><code><div>/(\d{<span class="hljs-number">4</span>})-(\d{<span class="hljs-number">2</span>})-(\d{<span class="hljs-number">2</span>})/
+</div></code></pre>
+<p><strong>Translation:</strong> Match and capture year, month, and day separately
+<strong>Reasoning:</strong> Parentheses create groups that can be extracted via match results
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;2023-12-25&quot;</code> ✅ <strong>Match</strong> - Groups: [&quot;2023&quot;, &quot;12&quot;, &quot;25&quot;]</li>
+<li><code>&quot;23-12-25&quot;</code> ❌ <strong>No Match</strong> - Year needs 4 digits, not 2</li>
+</ul>
+<h4 id="alternation-or"><code>|</code> - Alternation (OR)</h4>
+<p><strong>Example 15: File Extension Check</strong></p>
+<pre class="hljs"><code><div>/\.(jpg|png|gif)$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match dot followed by &quot;jpg&quot;, &quot;png&quot;, or &quot;gif&quot; at string end
+<strong>Reasoning:</strong> <code>|</code> provides alternatives, parentheses group the options
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;image.jpg&quot;</code> ✅ <strong>Match</strong> - Ends with &quot;.jpg&quot;</li>
+<li><code>&quot;image.bmp&quot;</code> ❌ <strong>No Match</strong> - &quot;.bmp&quot; not in allowed extensions</li>
+</ul>
+<h3 id="advanced-character-classes">Advanced Character Classes</h3>
+<h4 id="b---word-boundary"><code>\b</code> - Word Boundary</h4>
+<p><strong>Example 16: Whole Word Match</strong></p>
+<pre class="hljs"><code><div>/\bcat\b/
+</div></code></pre>
+<p><strong>Translation:</strong> Match &quot;cat&quot; as a complete word, not as part of another word
+<strong>Reasoning:</strong> <code>\b</code> asserts position at word boundary (between \w and \W)
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;I have a cat here&quot;</code> ✅ <strong>Match</strong> - &quot;cat&quot; is a separate word</li>
+<li><code>&quot;I have a caterpillar&quot;</code> ❌ <strong>No Match</strong> - &quot;cat&quot; is part of &quot;caterpillar&quot;</li>
+</ul>
+<h4 id="case-insensitive-matching">Case-Insensitive Matching</h4>
+<p><strong>Example 17: Case-Insensitive Email</strong></p>
+<pre class="hljs"><code><div>/^[a-z]+@[a-z]+\.[a-z]+$/i
+</div></code></pre>
+<p><strong>Translation:</strong> Match email format ignoring case
+<strong>Reasoning:</strong> <code>i</code> flag makes entire pattern case-insensitive
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;John@Gmail.Com&quot;</code> ✅ <strong>Match</strong> - Case ignored due to <code>i</code> flag</li>
+<li><code>&quot;john@gmail&quot;</code> ❌ <strong>No Match</strong> - Missing domain extension (no dot + extension)</li>
+</ul>
+<h3 id="lookahead-and-lookbehind">Lookahead and Lookbehind</h3>
+<h4 id="positive-lookahead"><code>(?=...)</code> - Positive Lookahead</h4>
+<p><strong>Example 18: Password Validation</strong></p>
+<pre class="hljs"><code><div>/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{<span class="hljs-number">8</span>,}$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match strings that contain at least one digit, lowercase, uppercase, and are 8+ characters
+<strong>Reasoning:</strong> Lookaheads check conditions without consuming characters
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;Password1&quot;</code> ✅ <strong>Match</strong> - Has digit, lowercase, uppercase, 8+ chars</li>
+<li><code>&quot;password1&quot;</code> ❌ <strong>No Match</strong> - Missing uppercase letter</li>
+</ul>
+<h4 id="negative-lookahead"><code>(?!...)</code> - Negative Lookahead</h4>
+<p><strong>Example 19: Exclude Specific Pattern</strong></p>
+<pre class="hljs"><code><div>/^(?!.*admin)\w+$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match word characters but reject if contains &quot;admin&quot;
+<strong>Reasoning:</strong> Negative lookahead ensures &quot;admin&quot; doesn't appear anywhere
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;user123&quot;</code> ✅ <strong>Match</strong> - No &quot;admin&quot; substring</li>
+<li><code>&quot;administrator&quot;</code> ❌ <strong>No Match</strong> - Contains &quot;admin&quot;</li>
+</ul>
+<h3 id="complex-real-world-patterns">Complex Real-World Patterns</h3>
+<h4 id="email-validation-simplified">Email Validation (Simplified)</h4>
+<p><strong>Example 20: Email Pattern</strong></p>
+<pre class="hljs"><code><div>/^[a-zA-Z0<span class="hljs-number">-9.</span>_%+-]+@[a-zA-Z0<span class="hljs-number">-9.</span>-]+\.[a-zA-Z]{<span class="hljs-number">2</span>,}$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match valid email format with local part, @, domain, and TLD
+<strong>Reasoning:</strong> Combines character classes, quantifiers, and anchors for complete validation
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;user.name+tag@example.com&quot;</code> ✅ <strong>Match</strong> - Valid email format</li>
+<li><code>&quot;invalid.email&quot;</code> ❌ <strong>No Match</strong> - Missing @ and domain</li>
+</ul>
+<h4 id="url-validation">URL Validation</h4>
+<p><strong>Example 21: HTTP/HTTPS URL</strong></p>
+<pre class="hljs"><code><div>/^https?:\/\/[\w.-]+\.[a-zA-Z]{<span class="hljs-number">2</span>,}(\/[\w.-]*)*\/?$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match HTTP/HTTPS URLs with domain and optional path
+<strong>Reasoning:</strong> <code>?</code> makes 's' optional, <code>\/</code> escapes forward slash, <code>*</code> allows multiple path segments
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;https://www.example.com/path&quot;</code> ✅ <strong>Match</strong> - Valid HTTPS URL with path</li>
+<li><code>&quot;ftp://example.com&quot;</code> ❌ <strong>No Match</strong> - Protocol must be HTTP or HTTPS</li>
+</ul>
+<h4 id="phone-number-us-format">Phone Number (US Format)</h4>
+<p><strong>Example 22: Flexible Phone Format</strong></p>
+<pre class="hljs"><code><div>/^\(?(\d{<span class="hljs-number">3</span>})\)?[-.\s]?(\d{<span class="hljs-number">3</span>})[-.\s]?(\d{<span class="hljs-number">4</span>})$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match US phone numbers with optional parentheses and various separators
+<strong>Reasoning:</strong> <code>\(?</code> makes opening paren optional, <code>[-.\s]?</code> allows different separators
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;(555) 123-4567&quot;</code> ✅ <strong>Match</strong> - Parentheses and space/dash format</li>
+<li><code>&quot;555.123.4567&quot;</code> ✅ <strong>Match</strong> - Dot separator format</li>
+<li><code>&quot;55512345678&quot;</code> ❌ <strong>No Match</strong> - Too many digits (11 instead of 10)</li>
+</ul>
+<h4 id="credit-card-number">Credit Card Number</h4>
+<p><strong>Example 23: Credit Card Pattern</strong></p>
+<pre class="hljs"><code><div>/^(\d{<span class="hljs-number">4</span>}[-\s]?){<span class="hljs-number">3</span>}\d{<span class="hljs-number">4</span>}$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match 16-digit credit card with optional spaces or dashes every 4 digits
+<strong>Reasoning:</strong> <code>{3}</code> repeats the 4-digit + separator pattern, final <code>\d{4}</code> for last group
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;1234-5678-9012-3456&quot;</code> ✅ <strong>Match</strong> - Standard format with dashes</li>
+<li><code>&quot;1234 5678 9012 345&quot;</code> ❌ <strong>No Match</strong> - Last group has only 3 digits</li>
+</ul>
+<h4 id="ipv4-address">IPv4 Address</h4>
+<p><strong>Example 24: IP Address Validation</strong></p>
+<pre class="hljs"><code><div>/^((<span class="hljs-number">25</span>[<span class="hljs-number">0</span><span class="hljs-number">-5</span>]|<span class="hljs-number">2</span>[<span class="hljs-number">0</span><span class="hljs-number">-4</span>][<span class="hljs-number">0</span><span class="hljs-number">-9</span>]|[<span class="hljs-number">01</span>]?[<span class="hljs-number">0</span><span class="hljs-number">-9</span>][<span class="hljs-number">0</span><span class="hljs-number">-9</span>]?)\.){<span class="hljs-number">3</span>}(<span class="hljs-number">25</span>[<span class="hljs-number">0</span><span class="hljs-number">-5</span>]|<span class="hljs-number">2</span>[<span class="hljs-number">0</span><span class="hljs-number">-4</span>][<span class="hljs-number">0</span><span class="hljs-number">-9</span>]|[<span class="hljs-number">01</span>]?[<span class="hljs-number">0</span><span class="hljs-number">-9</span>][<span class="hljs-number">0</span><span class="hljs-number">-9</span>]?)$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match valid IPv4 addresses (0-255 for each octet)
+<strong>Reasoning:</strong> Complex pattern ensuring each octet is 0-255, repeated 4 times with dots
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;192.168.1.1&quot;</code> ✅ <strong>Match</strong> - Valid IP with all octets ≤ 255</li>
+<li><code>&quot;256.1.1.1&quot;</code> ❌ <strong>No Match</strong> - First octet exceeds 255</li>
+</ul>
+<h4 id="strong-password">Strong Password</h4>
+<p><strong>Example 25: Complex Password Requirements</strong></p>
+<pre class="hljs"><code><div>/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{<span class="hljs-number">8</span>,}$/
+</div></code></pre>
+<p><strong>Translation:</strong> Match passwords with lowercase, uppercase, digit, special char, 8+ length
+<strong>Reasoning:</strong> Multiple positive lookaheads ensure all requirements met before checking length
+<strong>Test Cases:</strong></p>
+<ul>
+<li><code>&quot;MyP@ssw0rd&quot;</code> ✅ <strong>Match</strong> - Contains all required character types</li>
+<li><code>&quot;MyPassword&quot;</code> ❌ <strong>No Match</strong> - Missing digit and special character</li>
+</ul>
+<h2 id="quick-reference">Quick Reference</h2>
+<h3 id="character-classes">Character Classes</h3>
+<ul>
+<li><code>\d</code> = <code>[0-9]</code> (digits)</li>
+<li><code>\D</code> = <code>[^0-9]</code> (non-digits)</li>
+<li><code>\w</code> = <code>[a-zA-Z0-9_]</code> (word characters)</li>
+<li><code>\W</code> = <code>[^a-zA-Z0-9_]</code> (non-word characters)</li>
+<li><code>\s</code> = <code>[\t\n\r\f\v ]</code> (whitespace)</li>
+<li><code>\S</code> = <code>[^\t\n\r\f\v ]</code> (non-whitespace)</li>
+</ul>
+<h3 id="quantifiers">Quantifiers</h3>
+<ul>
+<li><code>*</code> = 0 or more</li>
+<li><code>+</code> = 1 or more</li>
+<li><code>?</code> = 0 or 1</li>
+<li><code>{n}</code> = exactly n</li>
+<li><code>{n,}</code> = n or more</li>
+<li><code>{n,m}</code> = between n and m</li>
+</ul>
+<h3 id="anchors">Anchors</h3>
+<ul>
+<li><code>^</code> = start of string</li>
+<li><code>$</code> = end of string</li>
+<li><code>\b</code> = word boundary</li>
+<li><code>\B</code> = non-word boundary</li>
+</ul>
+<h3 id="character-sets">Character Sets</h3>
+<ul>
+<li><code>[abc]</code> = match any character a, b, or c</li>
+<li><code>[^abc]</code> = match any character except a, b, or c</li>
+<li><code>[a-z]</code> = match any lowercase letter</li>
+<li><code>[A-Z]</code> = match any uppercase letter</li>
+<li><code>[0-9]</code> = match any digit</li>
+<li><code>[a-zA-Z0-9]</code> = match any alphanumeric character</li>
+</ul>
+<h3 id="groups-extract-or-group-patterns"><strong>Groups (Extract or Group Patterns)</strong></h3>
+<ul>
+<li><code>(pattern)</code> = capturing group (extract matched text)</li>
+<li><code>(?:pattern)</code> = non-capturing group (group without extraction)</li>
+<li><code>(pattern1|pattern2)</code> = alternation within group</li>
+<li><code>(?&lt;name&gt;pattern)</code> = named capturing group</li>
+<li><code>(?=pattern)</code> = positive lookahead</li>
+<li><code>(?!pattern)</code> = negative lookahead</li>
+<li><code>(?&lt;=pattern)</code> = positive lookbehind</li>
+<li><code>(?&lt;!pattern)</code> = negative lookbehind</li>
+</ul>
+<h3 id="flags">Flags</h3>
+<ul>
+<li><code>i</code> = case insensitive</li>
+<li><code>g</code> = global (find all matches)</li>
+<li><code>m</code> = multiline (^ and $ match line breaks)</li>
+<li><code>s</code> = dotall (. matches newlines)</li>
+</ul>
+<h3 id="javascript-usage">JavaScript Usage</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Creating regex</span>
+<span class="hljs-keyword">const</span> regex1 = <span class="hljs-regexp">/pattern/</span>flags;
+<span class="hljs-keyword">const</span> regex2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'pattern'</span>, <span class="hljs-string">'flags'</span>);
+
+<span class="hljs-comment">// Testing</span>
+regex.test(string);          <span class="hljs-comment">// returns boolean</span>
+string.match(regex);         <span class="hljs-comment">// returns match array or null</span>
+string.replace(regex, replacement);
+string.split(regex);
+</div></code></pre>
+
+</body>
+</html>
