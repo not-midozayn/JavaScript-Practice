@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function changeVideo(value) {
+            var videoElement = document.getElementById('myvideo');
+            videoElement.src = value;
+            videoElement.play();
+        }
+    </script>
+    <style>
+        .container {
+            width: 80vw;
+            height: 80vh;
+            border: 5px solid black;
+            border-radius: 20px;
+            margin: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .btns {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            height: 100%;
+            background-color: orange; 
+            transition: background-color 0.3s ease;
+            padding: 10px; 
+        }
+
+        .btns:hover {
+            background-color: white; 
+        }
+
+        .buttons button {
+            padding: 10px;
+            cursor: pointer;
+            height: 50px;
+            width: 100%;
+            transition: transform 1s, background-color 0.3s; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
+            background-color: inherit; 
+        }
+
+        .buttons button:hover {
+            transform: rotate(360deg); 
+            background-color: orange; 
+        }
+
+        .buttons button:active {
+            background-color: blue; 
+            color: white; 
+        }
+
+        .videos {
+            width: 75%;
+            height: 95%;
+            padding: 5px;
+            border: 5px solid rgb(0, 4, 255);
+            display: flex;
+            border-radius: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: 10px 10px 400px rgb(0, 255, 157) inset;
+            transition: all 2s;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .videos:hover video {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="btns">
+            <div class="buttons">
+                <button onclick="changeVideo('./Video/3.mp4')">Video1</button>
+                <button onclick="changeVideo('./Video/2.mp4')">Video2</button>
+                <button onclick="changeVideo('./Video/1.mp4')">Video3</button>
+                <button onclick="changeVideo('./Video/2.mp4')">Video4</button>
+                <button onclick="changeVideo('./Video/3.mp4')">Video5</button>
+                <button onclick="changeVideo('./Video/1.mp4')">Video6</button>
+                <button onclick="changeVideo('./Video/2.mp4')">Video7</button>
+                <button onclick="changeVideo('./Video/3.mp4')">Video8</button>
+                <button onclick="changeVideo('./Video/1.mp4')">Video9</button>
+                <button onclick="changeVideo('./Video/2.mp4')">Video10</button>
+            </div>
+        </div>
+        <div class="videos">
+            <video id="myvideo" controls src="./Video/3.mp4"></video>
+        </div>
+    </div>
+</body>
+
+</html>
