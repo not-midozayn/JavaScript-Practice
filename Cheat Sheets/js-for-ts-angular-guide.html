@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-for-ts-angular-guide.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A//Users//midozen//Desktop//Javascript%20Methods//style.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="javascript-foundation-for-typescript--angular">JavaScript Foundation for TypeScript &amp; Angular</h1>
+<p>This guide covers the essential JavaScript concepts you need to master before diving into TypeScript and Angular development.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#es6-modules">ES6+ Modules</a></li>
+<li><a href="#classes-and-oop">Classes and Object-Oriented Programming</a></li>
+<li><a href="#arrow-functions">Arrow Functions and This Context</a></li>
+<li><a href="#destructuring-and-spread">Destructuring and Spread/Rest</a></li>
+<li><a href="#promises-and-async">Promises and Async/Await</a></li>
+<li><a href="#array-methods">Array Methods</a></li>
+<li><a href="#template-literals">Template Literals</a></li>
+<li><a href="#variables-and-scope">Let, Const, and Block Scope</a></li>
+<li><a href="#higher-order-functions">Higher-Order Functions</a></li>
+<li><a href="#error-handling">Error Handling</a></li>
+<li><a href="#json-and-data">JSON and Data Manipulation</a></li>
+<li><a href="#event-handling">Event Handling Patterns</a></li>
+</ol>
+<hr>
+<h2 id="es6-modules">ES6+ Modules</h2>
+<h3 id="named-exportsimports-most-common-in-angular">Named Exports/Imports (Most Common in Angular)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// user.service.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> </span>{
+  getUsers() {
+    <span class="hljs-keyword">return</span> [<span class="hljs-string">'John'</span>, <span class="hljs-string">'Jane'</span>];
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> API_URL = <span class="hljs-string">'https://api.example.com'</span>;
+
+<span class="hljs-comment">// app.component.js</span>
+<span class="hljs-keyword">import</span> { UserService, API_URL } <span class="hljs-keyword">from</span> <span class="hljs-string">'./user.service.js'</span>;
+</div></code></pre>
+<h3 id="default-exportsimports">Default Exports/Imports</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// config.js</span>
+<span class="hljs-keyword">const</span> config = {
+  <span class="hljs-attr">apiUrl</span>: <span class="hljs-string">'https://api.example.com'</span>,
+  <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> config;
+
+<span class="hljs-comment">// main.js</span>
+<span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">'./config.js'</span>;
+<span class="hljs-keyword">import</span> MyConfig <span class="hljs-keyword">from</span> <span class="hljs-string">'./config.js'</span>; <span class="hljs-comment">// Can use any name</span>
+</div></code></pre>
+<h3 id="barrel-exports-angular-pattern">Barrel Exports (Angular Pattern)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// services/index.js</span>
+<span class="hljs-keyword">export</span> { UserService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./user.service.js'</span>;
+<span class="hljs-keyword">export</span> { AuthService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./auth.service.js'</span>;
+<span class="hljs-keyword">export</span> { DataService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./data.service.js'</span>;
+
+<span class="hljs-comment">// app.component.js</span>
+<span class="hljs-keyword">import</span> { UserService, AuthService, DataService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./services'</span>;
+</div></code></pre>
+<h3 id="dynamic-imports-lazy-loading">Dynamic Imports (Lazy Loading)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Angular lazy loading pattern</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadAdminModule</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">module</span> = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./admin/admin.module.js'</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">module</span>.AdminModule;
+}
+
+<span class="hljs-comment">// Conditional loading</span>
+<span class="hljs-keyword">if</span> (user.isAdmin) {
+  <span class="hljs-keyword">const</span> { AdminPanel } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./admin-panel.js'</span>);
+  <span class="hljs-keyword">new</span> AdminPanel();
+}
+</div></code></pre>
+<hr>
+<h2 id="classes-and-object-oriented-programming">Classes and Object-Oriented Programming</h2>
+<h3 id="basic-class-syntax">Basic Class Syntax</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+  <span class="hljs-keyword">constructor</span>(name, email) {
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.email = email;
+    <span class="hljs-keyword">this</span>.isActive = <span class="hljs-literal">true</span>;
+  }
+
+  <span class="hljs-comment">// Method</span>
+  getInfo() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.name}</span> (<span class="hljs-subst">${<span class="hljs-keyword">this</span>.email}</span>)`</span>;
+  }
+
+  <span class="hljs-comment">// Static method</span>
+  <span class="hljs-keyword">static</span> createGuest() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User(<span class="hljs-string">'Guest'</span>, <span class="hljs-string">'guest@example.com'</span>);
+  }
+}
+
+<span class="hljs-keyword">const</span> user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">'John'</span>, <span class="hljs-string">'john@example.com'</span>);
+<span class="hljs-keyword">const</span> guest = User.createGuest();
+</div></code></pre>
+<h3 id="inheritance">Inheritance</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AdminUser</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">User</span> </span>{
+  <span class="hljs-keyword">constructor</span>(name, email, permissions) {
+    <span class="hljs-keyword">super</span>(name, email); <span class="hljs-comment">// Call parent constructor</span>
+    <span class="hljs-keyword">this</span>.permissions = permissions;
+  }
+
+  <span class="hljs-comment">// Override parent method</span>
+  getInfo() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Admin: <span class="hljs-subst">${<span class="hljs-keyword">super</span>.getInfo()}</span>`</span>;
+  }
+
+  <span class="hljs-comment">// New method</span>
+  hasPermission(permission) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.permissions.includes(permission);
+  }
+}
+
+<span class="hljs-keyword">const</span> admin = <span class="hljs-keyword">new</span> AdminUser(<span class="hljs-string">'Alice'</span>, <span class="hljs-string">'alice@example.com'</span>, [<span class="hljs-string">'read'</span>, <span class="hljs-string">'write'</span>]);
+</div></code></pre>
+<h3 id="getters-and-setters">Getters and Setters</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> </span>{
+  <span class="hljs-keyword">constructor</span>(name, price) {
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>._price = price; <span class="hljs-comment">// Private convention</span>
+  }
+
+  <span class="hljs-keyword">get</span> price() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._price;
+  }
+
+  <span class="hljs-keyword">set</span> price(value) {
+    <span class="hljs-keyword">if</span> (value &lt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Price cannot be negative'</span>);
+    }
+    <span class="hljs-keyword">this</span>._price = value;
+  }
+
+  <span class="hljs-keyword">get</span> displayPrice() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`$<span class="hljs-subst">${<span class="hljs-keyword">this</span>._price.toFixed(<span class="hljs-number">2</span>)}</span>`</span>;
+  }
+}
+
+<span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">'Laptop'</span>, <span class="hljs-number">999</span>);
+<span class="hljs-built_in">console</span>.log(product.displayPrice); <span class="hljs-comment">// $999.00</span>
+product.price = <span class="hljs-number">899</span>; <span class="hljs-comment">// Uses setter</span>
+</div></code></pre>
+<hr>
+<h2 id="arrow-functions-and-this-context">Arrow Functions and This Context</h2>
+<h3 id="arrow-function-syntax">Arrow Function Syntax</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Traditional function</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">a, b</span>) </span>{
+  <span class="hljs-keyword">return</span> a + b;
+}
+
+<span class="hljs-comment">// Arrow function</span>
+<span class="hljs-keyword">const</span> add = <span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a + b;
+
+<span class="hljs-comment">// With single parameter (parentheses optional)</span>
+<span class="hljs-keyword">const</span> square = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x * x;
+
+<span class="hljs-comment">// With no parameters</span>
+<span class="hljs-keyword">const</span> getRandomNumber = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Math</span>.random();
+
+<span class="hljs-comment">// With block body</span>
+<span class="hljs-keyword">const</span> processUser = <span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> processed = user.name.toUpperCase();
+  <span class="hljs-keyword">return</span> { ...user, <span class="hljs-attr">name</span>: processed };
+};
+</div></code></pre>
+<h3 id="this-context-critical-for-angular">This Context (Critical for Angular)</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.data = <span class="hljs-string">'Hello World'</span>;
+  }
+
+  <span class="hljs-comment">// Regular method - 'this' can change based on how it's called</span>
+  regularMethod() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.data);
+  }
+
+  <span class="hljs-comment">// Arrow method - 'this' is always bound to the class instance</span>
+  arrowMethod = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.data);
+  }
+
+  setupEventListener() {
+    <span class="hljs-keyword">const</span> button = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'button'</span>);
+    
+    <span class="hljs-comment">// This won't work - 'this' will be the button</span>
+    button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">this</span>.regularMethod);
+    
+    <span class="hljs-comment">// These will work</span>
+    button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">this</span>.arrowMethod);
+    button.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; <span class="hljs-keyword">this</span>.regularMethod());
+    button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">this</span>.regularMethod.bind(<span class="hljs-keyword">this</span>));
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="destructuring-and-spreadrest">Destructuring and Spread/Rest</h2>
+<h3 id="object-destructuring">Object Destructuring</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> user = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>,
+  <span class="hljs-attr">email</span>: <span class="hljs-string">'john@example.com'</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,
+  <span class="hljs-attr">address</span>: {
+    <span class="hljs-attr">city</span>: <span class="hljs-string">'New York'</span>,
+    <span class="hljs-attr">country</span>: <span class="hljs-string">'USA'</span>
+  }
+};
+
+<span class="hljs-comment">// Basic destructuring</span>
+<span class="hljs-keyword">const</span> { name, email } = user;
+
+<span class="hljs-comment">// With renaming</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-attr">name</span>: userName, <span class="hljs-attr">email</span>: userEmail } = user;
+
+<span class="hljs-comment">// With default values</span>
+<span class="hljs-keyword">const</span> { name, phone = <span class="hljs-string">'N/A'</span> } = user;
+
+<span class="hljs-comment">// Nested destructuring</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-attr">address</span>: { city, country } } = user;
+
+<span class="hljs-comment">// Function parameters</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayUser</span>(<span class="hljs-params">{ name, email, age = <span class="hljs-number">0</span> }</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${name}</span> (<span class="hljs-subst">${email}</span>) - Age: <span class="hljs-subst">${age}</span>`</span>);
+}
+displayUser(user);
+</div></code></pre>
+<h3 id="array-destructuring">Array Destructuring</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> colors = [<span class="hljs-string">'red'</span>, <span class="hljs-string">'green'</span>, <span class="hljs-string">'blue'</span>, <span class="hljs-string">'yellow'</span>];
+
+<span class="hljs-comment">// Basic destructuring</span>
+<span class="hljs-keyword">const</span> [first, second] = colors;
+
+<span class="hljs-comment">// Skip elements</span>
+<span class="hljs-keyword">const</span> [primary, , tertiary] = colors;
+
+<span class="hljs-comment">// Rest operator</span>
+<span class="hljs-keyword">const</span> [primary, ...otherColors] = colors;
+
+<span class="hljs-comment">// Swapping variables</span>
+<span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>;
+[a, b] = [b, a];
+</div></code></pre>
+<h3 id="spread-operator">Spread Operator</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Arrays</span>
+<span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">const</span> moreNumbers = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];
+<span class="hljs-keyword">const</span> allNumbers = [...numbers, ...moreNumbers]; <span class="hljs-comment">// [1, 2, 3, 4, 5, 6]</span>
+
+<span class="hljs-comment">// Objects</span>
+<span class="hljs-keyword">const</span> baseConfig = { <span class="hljs-attr">theme</span>: <span class="hljs-string">'dark'</span>, <span class="hljs-attr">lang</span>: <span class="hljs-string">'en'</span> };
+<span class="hljs-keyword">const</span> userConfig = { <span class="hljs-attr">theme</span>: <span class="hljs-string">'light'</span>, <span class="hljs-attr">notifications</span>: <span class="hljs-literal">true</span> };
+<span class="hljs-keyword">const</span> finalConfig = { ...baseConfig, ...userConfig }; <span class="hljs-comment">// theme: 'light'</span>
+
+<span class="hljs-comment">// Function arguments</span>
+<span class="hljs-keyword">const</span> sum = <span class="hljs-function">(<span class="hljs-params">a, b, c</span>) =&gt;</span> a + b + c;
+<span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">console</span>.log(sum(...numbers));
+
+<span class="hljs-comment">// Copying arrays/objects</span>
+<span class="hljs-keyword">const</span> originalArray = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">const</span> copiedArray = [...originalArray];
+<span class="hljs-keyword">const</span> originalObject = { <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span> };
+<span class="hljs-keyword">const</span> copiedObject = { ...originalObject };
+</div></code></pre>
+<h3 id="rest-parameters">Rest Parameters</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Collect remaining parameters</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processData</span>(<span class="hljs-params">required, ...optional</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Required:'</span>, required);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Optional:'</span>, optional);
+}
+processData(<span class="hljs-string">'important'</span>, <span class="hljs-string">'extra1'</span>, <span class="hljs-string">'extra2'</span>, <span class="hljs-string">'extra3'</span>);
+
+<span class="hljs-comment">// Object rest</span>
+<span class="hljs-keyword">const</span> user = { <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">email</span>: <span class="hljs-string">'john@example.com'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>, <span class="hljs-attr">city</span>: <span class="hljs-string">'NYC'</span> };
+<span class="hljs-keyword">const</span> { name, ...otherDetails } = user;
+<span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// 'John'</span>
+<span class="hljs-built_in">console</span>.log(otherDetails); <span class="hljs-comment">// { email: '...', age: 30, city: 'NYC' }</span>
+</div></code></pre>
+<hr>
+<h2 id="promises-and-asyncawait">Promises and Async/Await</h2>
+<h3 id="promise-basics">Promise Basics</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Creating a promise</span>
+<span class="hljs-keyword">const</span> fetchData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      <span class="hljs-keyword">const</span> success = <span class="hljs-built_in">Math</span>.random() &gt; <span class="hljs-number">0.5</span>;
+      <span class="hljs-keyword">if</span> (success) {
+        resolve({ <span class="hljs-attr">data</span>: <span class="hljs-string">'Hello World'</span> });
+      } <span class="hljs-keyword">else</span> {
+        reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Failed to fetch data'</span>));
+      }
+    }, <span class="hljs-number">1000</span>);
+  });
+};
+
+<span class="hljs-comment">// Using promises</span>
+fetchData()
+  .then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(result.data))
+  .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-built_in">console</span>.error(error.message))
+  .finally(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Operation completed'</span>));
+</div></code></pre>
+<h3 id="asyncawait-preferred-in-modern-development">Async/Await (Preferred in Modern Development)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Async function</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserData</span>(<span class="hljs-params">userId</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`/api/users/<span class="hljs-subst">${userId}</span>`</span>);
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> response.json();
+    <span class="hljs-keyword">return</span> user;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error fetching user:'</span>, error);
+    <span class="hljs-keyword">throw</span> error;
+  }
+}
+
+<span class="hljs-comment">// Using async function</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayUser</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> getUserData(<span class="hljs-number">123</span>);
+    <span class="hljs-built_in">console</span>.log(user.name);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed to display user'</span>);
+  }
+}
+
+<span class="hljs-comment">// Arrow async functions</span>
+<span class="hljs-keyword">const</span> fetchUsers = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">'/api/users'</span>);
+  <span class="hljs-keyword">return</span> response.json();
+};
+</div></code></pre>
+<h3 id="promise-utilities">Promise Utilities</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Promise.all - Wait for all promises</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadAllData</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> [users, posts, comments] = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all([
+      fetch(<span class="hljs-string">'/api/users'</span>).then(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.json()),
+      fetch(<span class="hljs-string">'/api/posts'</span>).then(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.json()),
+      fetch(<span class="hljs-string">'/api/comments'</span>).then(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.json())
+    ]);
+    <span class="hljs-keyword">return</span> { users, posts, comments };
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'One or more requests failed:'</span>, error);
+  }
+}
+
+<span class="hljs-comment">// Promise.allSettled - Wait for all, even if some fail</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.allSettled([
+  fetchUsers(),
+  fetchPosts(),
+  fetchComments()
+]);
+
+results.forEach(<span class="hljs-function">(<span class="hljs-params">result, index</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (result.status === <span class="hljs-string">'fulfilled'</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Request <span class="hljs-subst">${index}</span> succeeded:`</span>, result.value);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Request <span class="hljs-subst">${index}</span> failed:`</span>, result.reason);
+  }
+});
+</div></code></pre>
+<hr>
+<h2 id="array-methods">Array Methods</h2>
+<h3 id="essential-array-methods-for-data-processing">Essential Array Methods for Data Processing</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> users = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">role</span>: <span class="hljs-string">'user'</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">role</span>: <span class="hljs-string">'admin'</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">35</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">role</span>: <span class="hljs-string">'user'</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">28</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">role</span>: <span class="hljs-string">'admin'</span> }
+];
+
+<span class="hljs-comment">// map - Transform each element</span>
+<span class="hljs-keyword">const</span> names = users.map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.name);
+<span class="hljs-keyword">const</span> userCards = users.map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> ({
+  ...user,
+  <span class="hljs-attr">displayName</span>: user.name.toUpperCase(),
+  <span class="hljs-attr">canEdit</span>: user.role === <span class="hljs-string">'admin'</span>
+}));
+
+<span class="hljs-comment">// filter - Keep elements that match condition</span>
+<span class="hljs-keyword">const</span> activeUsers = users.filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.active);
+<span class="hljs-keyword">const</span> admins = users.filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.role === <span class="hljs-string">'admin'</span>);
+<span class="hljs-keyword">const</span> youngAdmins = users.filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.age &lt; <span class="hljs-number">30</span> &amp;&amp; user.role === <span class="hljs-string">'admin'</span>);
+
+<span class="hljs-comment">// find - Get first element that matches</span>
+<span class="hljs-keyword">const</span> specificUser = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === <span class="hljs-number">2</span>);
+<span class="hljs-keyword">const</span> firstAdmin = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.role === <span class="hljs-string">'admin'</span>);
+
+<span class="hljs-comment">// reduce - Accumulate values</span>
+<span class="hljs-keyword">const</span> totalAge = users.reduce(<span class="hljs-function">(<span class="hljs-params">sum, user</span>) =&gt;</span> sum + user.age, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">const</span> usersByRole = users.reduce(<span class="hljs-function">(<span class="hljs-params">acc, user</span>) =&gt;</span> {
+  acc[user.role] = acc[user.role] || [];
+  acc[user.role].push(user);
+  <span class="hljs-keyword">return</span> acc;
+}, {});
+
+<span class="hljs-comment">// some - Check if any element matches</span>
+<span class="hljs-keyword">const</span> hasAdmins = users.some(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.role === <span class="hljs-string">'admin'</span>);
+<span class="hljs-keyword">const</span> hasMinors = users.some(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.age &lt; <span class="hljs-number">18</span>);
+
+<span class="hljs-comment">// every - Check if all elements match</span>
+<span class="hljs-keyword">const</span> allActive = users.every(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.active);
+<span class="hljs-keyword">const</span> allAdults = users.every(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.age &gt;= <span class="hljs-number">18</span>);
+
+<span class="hljs-comment">// sort - Sort elements</span>
+<span class="hljs-keyword">const</span> sortedByAge = [...users].sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.age - b.age);
+<span class="hljs-keyword">const</span> sortedByName = [...users].sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.name.localeCompare(b.name));
+
+<span class="hljs-comment">// forEach - Execute function for each element</span>
+users.forEach(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${user.name}</span> is <span class="hljs-subst">${user.age}</span> years old`</span>);
+});
+</div></code></pre>
+<h3 id="method-chaining-common-pattern">Method Chaining (Common Pattern)</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> processedUsers = users
+  .filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.active)
+  .map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> ({
+    ...user,
+    <span class="hljs-attr">displayName</span>: user.name.toUpperCase(),
+    <span class="hljs-attr">ageGroup</span>: user.age &lt; <span class="hljs-number">30</span> ? <span class="hljs-string">'young'</span> : <span class="hljs-string">'experienced'</span>
+  }))
+  .sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.name.localeCompare(b.name));
+
+<span class="hljs-comment">// Complex data processing</span>
+<span class="hljs-keyword">const</span> userSummary = users
+  .filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.active)
+  .reduce(<span class="hljs-function">(<span class="hljs-params">summary, user</span>) =&gt;</span> {
+    summary.totalUsers++;
+    summary.totalAge += user.age;
+    summary.roles[user.role] = (summary.roles[user.role] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> summary;
+  }, { <span class="hljs-attr">totalUsers</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">totalAge</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">roles</span>: {} });
+</div></code></pre>
+<hr>
+<h2 id="template-literals">Template Literals</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> name = <span class="hljs-string">'John'</span>;
+<span class="hljs-keyword">const</span> age = <span class="hljs-number">30</span>;
+
+<span class="hljs-comment">// Old way</span>
+<span class="hljs-keyword">const</span> message1 = <span class="hljs-string">'Hello, my name is '</span> + name + <span class="hljs-string">' and I am '</span> + age + <span class="hljs-string">' years old.'</span>;
+
+<span class="hljs-comment">// Template literal</span>
+<span class="hljs-keyword">const</span> message2 = <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${name}</span> and I am <span class="hljs-subst">${age}</span> years old.`</span>;
+
+<span class="hljs-comment">// Expressions inside template literals</span>
+<span class="hljs-keyword">const</span> user = { <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">scores</span>: [<span class="hljs-number">85</span>, <span class="hljs-number">92</span>, <span class="hljs-number">78</span>] };
+<span class="hljs-keyword">const</span> summary = <span class="hljs-string">`<span class="hljs-subst">${user.name}</span>'s average score is <span class="hljs-subst">${user.scores.reduce((a, b) =&gt; a + b) <span class="hljs-regexp">/ user.scores.length}`;
+</span></span></span></div></code></pre>
+<h3 id="multi-line-strings">Multi-line Strings</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> htmlTemplate = <span class="hljs-string">`
+  &lt;div class="user-card"&gt;
+    &lt;h2&gt;<span class="hljs-subst">${user.name}</span>&lt;/h2&gt;
+    &lt;p&gt;Email: <span class="hljs-subst">${user.email}</span>&lt;/p&gt;
+    &lt;p&gt;Status: <span class="hljs-subst">${user.active ? <span class="hljs-string">'Active'</span> : <span class="hljs-string">'Inactive'</span>}</span>&lt;/p&gt;
+  &lt;/div&gt;
+`</span>;
+
+<span class="hljs-keyword">const</span> sqlQuery = <span class="hljs-string">`
+  SELECT *
+  FROM users
+  WHERE age &gt; <span class="hljs-subst">${minAge}</span>
+    AND role = '<span class="hljs-subst">${role}</span>'
+  ORDER BY name ASC
+`</span>;
+</div></code></pre>
+<h3 id="tagged-templates-advanced">Tagged Templates (Advanced)</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">highlight</span>(<span class="hljs-params">strings, ...values</span>) </span>{
+  <span class="hljs-keyword">return</span> strings.reduce(<span class="hljs-function">(<span class="hljs-params">result, string, i</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> value = values[i] ? <span class="hljs-string">`&lt;mark&gt;<span class="hljs-subst">${values[i]}</span>&lt;/mark&gt;`</span> : <span class="hljs-string">''</span>;
+    <span class="hljs-keyword">return</span> result + string + value;
+  }, <span class="hljs-string">''</span>);
+}
+
+<span class="hljs-keyword">const</span> searchTerm = <span class="hljs-string">'JavaScript'</span>;
+<span class="hljs-keyword">const</span> text = highlight<span class="hljs-string">`Learning <span class="hljs-subst">${searchTerm}</span> is fun and <span class="hljs-subst">${searchTerm}</span> is powerful!`</span>;
+<span class="hljs-comment">// Result: "Learning &lt;mark&gt;JavaScript&lt;/mark&gt; is fun and &lt;mark&gt;JavaScript&lt;/mark&gt; is powerful!"</span>
+</div></code></pre>
+<hr>
+<h2 id="variables-and-scope">Variables and Scope</h2>
+<h3 id="let-const-and-var">Let, Const, and Var</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// var - function-scoped, can be redeclared</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">varExample</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">var</span> x = <span class="hljs-number">2</span>; <span class="hljs-comment">// Same variable</span>
+    <span class="hljs-built_in">console</span>.log(x); <span class="hljs-comment">// 2</span>
+  }
+  <span class="hljs-built_in">console</span>.log(x); <span class="hljs-comment">// 2</span>
+}
+
+<span class="hljs-comment">// let - block-scoped, can be reassigned</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">letExample</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">let</span> x = <span class="hljs-number">2</span>; <span class="hljs-comment">// Different variable</span>
+    <span class="hljs-built_in">console</span>.log(x); <span class="hljs-comment">// 2</span>
+  }
+  <span class="hljs-built_in">console</span>.log(x); <span class="hljs-comment">// 1</span>
+}
+
+<span class="hljs-comment">// const - block-scoped, cannot be reassigned</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">constExample</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> x = <span class="hljs-number">1</span>;
+  <span class="hljs-comment">// x = 2; // Error!</span>
+  
+  <span class="hljs-keyword">const</span> user = { <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span> };
+  user.name = <span class="hljs-string">'Jane'</span>; <span class="hljs-comment">// OK - object content can change</span>
+  user.age = <span class="hljs-number">30</span>; <span class="hljs-comment">// OK</span>
+  <span class="hljs-comment">// user = {}; // Error - cannot reassign</span>
+}
+</div></code></pre>
+<h3 id="block-scope-and-closures">Block Scope and Closures</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Block scope</span>
+{
+  <span class="hljs-keyword">let</span> blockScoped = <span class="hljs-string">'I only exist in this block'</span>;
+  <span class="hljs-keyword">const</span> alsoBlockScoped = <span class="hljs-string">'Me too'</span>;
+}
+<span class="hljs-comment">// console.log(blockScoped); // Error</span>
+
+<span class="hljs-comment">// Closures - inner functions have access to outer scope</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createCounter</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+  
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">increment</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ++count,
+    <span class="hljs-attr">decrement</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> --count,
+    <span class="hljs-attr">getValue</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> count
+  };
+}
+
+<span class="hljs-keyword">const</span> counter = createCounter();
+<span class="hljs-built_in">console</span>.log(counter.increment()); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">console</span>.log(counter.increment()); <span class="hljs-comment">// 2</span>
+<span class="hljs-built_in">console</span>.log(counter.getValue()); <span class="hljs-comment">// 2</span>
+</div></code></pre>
+<hr>
+<h2 id="higher-order-functions">Higher-Order Functions</h2>
+<h3 id="functions-as-arguments">Functions as Arguments</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Function that takes another function as argument</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processArray</span>(<span class="hljs-params">array, processor</span>) </span>{
+  <span class="hljs-keyword">return</span> array.map(processor);
+}
+
+<span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+<span class="hljs-comment">// Using named function</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">double</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;
+}
+<span class="hljs-keyword">const</span> doubled = processArray(numbers, double);
+
+<span class="hljs-comment">// Using arrow function</span>
+<span class="hljs-keyword">const</span> tripled = processArray(numbers, x =&gt; x * <span class="hljs-number">3</span>);
+
+<span class="hljs-comment">// More complex example</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createValidator</span>(<span class="hljs-params">validationFn</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+    <span class="hljs-keyword">const</span> isValid = validationFn(value);
+    <span class="hljs-keyword">return</span> {
+      value,
+      isValid,
+      <span class="hljs-attr">message</span>: isValid ? <span class="hljs-string">'Valid'</span> : <span class="hljs-string">'Invalid'</span>
+    };
+  };
+}
+
+<span class="hljs-keyword">const</span> emailValidator = createValidator(<span class="hljs-function"><span class="hljs-params">email</span> =&gt;</span> email.includes(<span class="hljs-string">'@'</span>));
+<span class="hljs-keyword">const</span> result = emailValidator(<span class="hljs-string">'test@example.com'</span>);
+</div></code></pre>
+<h3 id="functions-returning-functions">Functions Returning Functions</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Currying</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">multiply</span>(<span class="hljs-params">a</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>) </span>{
+    <span class="hljs-keyword">return</span> a * b;
+  };
+}
+
+<span class="hljs-keyword">const</span> multiplyBy2 = multiply(<span class="hljs-number">2</span>);
+<span class="hljs-keyword">const</span> multiplyBy10 = multiply(<span class="hljs-number">10</span>);
+
+<span class="hljs-built_in">console</span>.log(multiplyBy2(<span class="hljs-number">5</span>)); <span class="hljs-comment">// 10</span>
+<span class="hljs-built_in">console</span>.log(multiplyBy10(<span class="hljs-number">5</span>)); <span class="hljs-comment">// 50</span>
+
+<span class="hljs-comment">// Arrow function version</span>
+<span class="hljs-keyword">const</span> add = <span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">b</span> =&gt;</span> a + b;
+<span class="hljs-keyword">const</span> add5 = add(<span class="hljs-number">5</span>);
+<span class="hljs-built_in">console</span>.log(add5(<span class="hljs-number">3</span>)); <span class="hljs-comment">// 8</span>
+
+<span class="hljs-comment">// Practical example - creating specialized functions</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createApiCall</span>(<span class="hljs-params">baseUrl</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">endpoint</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options = {}</span>) </span>{
+      <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">`<span class="hljs-subst">${baseUrl}</span><span class="hljs-subst">${endpoint}</span>`</span>, options);
+    };
+  };
+}
+
+<span class="hljs-keyword">const</span> apiCall = createApiCall(<span class="hljs-string">'https://api.example.com'</span>);
+<span class="hljs-keyword">const</span> getUsers = apiCall(<span class="hljs-string">'/users'</span>);
+<span class="hljs-keyword">const</span> getPosts = apiCall(<span class="hljs-string">'/posts'</span>);
+
+<span class="hljs-comment">// Usage</span>
+getUsers().then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json());
+</div></code></pre>
+<hr>
+<h2 id="error-handling">Error Handling</h2>
+<h3 id="try-catch-finally">Try-Catch-Finally</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Basic error handling</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">divideNumbers</span>(<span class="hljs-params">a, b</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">if</span> (b === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Division by zero is not allowed'</span>);
+    }
+    <span class="hljs-keyword">return</span> a / b;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error in divideNumbers:'</span>, error.message);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Division operation completed'</span>);
+  }
+}
+
+<span class="hljs-comment">// Async error handling</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fetchUserData</span>(<span class="hljs-params">userId</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`/api/users/<span class="hljs-subst">${userId}</span>`</span>);
+    
+    <span class="hljs-keyword">if</span> (!response.ok) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`HTTP error! status: <span class="hljs-subst">${response.status}</span>`</span>);
+    }
+    
+    <span class="hljs-keyword">const</span> userData = <span class="hljs-keyword">await</span> response.json();
+    <span class="hljs-keyword">return</span> userData;
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-keyword">if</span> (error.name === <span class="hljs-string">'TypeError'</span>) {
+      <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Network error:'</span>, error.message);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'API error:'</span>, error.message);
+    }
+    <span class="hljs-keyword">throw</span> error; <span class="hljs-comment">// Re-throw if you want calling code to handle it</span>
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'API call completed'</span>);
+  }
+}
+</div></code></pre>
+<h3 id="custom-errors">Custom Errors</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Custom error classes</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValidationError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Error</span> </span>{
+  <span class="hljs-keyword">constructor</span>(field, value) {
+    <span class="hljs-keyword">super</span>(<span class="hljs-string">`Validation failed for field "<span class="hljs-subst">${field}</span>" with value "<span class="hljs-subst">${value}</span>"`</span>);
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'ValidationError'</span>;
+    <span class="hljs-keyword">this</span>.field = field;
+    <span class="hljs-keyword">this</span>.value = value;
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApiError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Error</span> </span>{
+  <span class="hljs-keyword">constructor</span>(status, message) {
+    <span class="hljs-keyword">super</span>(message);
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'ApiError'</span>;
+    <span class="hljs-keyword">this</span>.status = status;
+  }
+}
+
+<span class="hljs-comment">// Using custom errors</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">validateUser</span>(<span class="hljs-params">user</span>) </span>{
+  <span class="hljs-keyword">if</span> (!user.email || !user.email.includes(<span class="hljs-string">'@'</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ValidationError(<span class="hljs-string">'email'</span>, user.email);
+  }
+  <span class="hljs-keyword">if</span> (!user.name || user.name.length &lt; <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ValidationError(<span class="hljs-string">'name'</span>, user.name);
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-comment">// Handling specific error types</span>
+<span class="hljs-keyword">try</span> {
+  validateUser({ <span class="hljs-attr">name</span>: <span class="hljs-string">'A'</span>, <span class="hljs-attr">email</span>: <span class="hljs-string">'invalid'</span> });
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-keyword">if</span> (error <span class="hljs-keyword">instanceof</span> ValidationError) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Validation failed: <span class="hljs-subst">${error.field}</span> = <span class="hljs-subst">${error.value}</span>`</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unexpected error:'</span>, error);
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="json-and-data-manipulation">JSON and Data Manipulation</h2>
+<h3 id="json-operations">JSON Operations</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// JavaScript object</span>
+<span class="hljs-keyword">const</span> user = {
+  <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'John Doe'</span>,
+  <span class="hljs-attr">email</span>: <span class="hljs-string">'john@example.com'</span>,
+  <span class="hljs-attr">preferences</span>: {
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">'dark'</span>,
+    <span class="hljs-attr">notifications</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">tags</span>: [<span class="hljs-string">'developer'</span>, <span class="hljs-string">'javascript'</span>]
+};
+
+<span class="hljs-comment">// Convert to JSON string</span>
+<span class="hljs-keyword">const</span> jsonString = <span class="hljs-built_in">JSON</span>.stringify(user);
+<span class="hljs-built_in">console</span>.log(jsonString);
+
+<span class="hljs-comment">// Convert back to object</span>
+<span class="hljs-keyword">const</span> parsedUser = <span class="hljs-built_in">JSON</span>.parse(jsonString);
+
+<span class="hljs-comment">// JSON with custom serialization</span>
+<span class="hljs-keyword">const</span> userWithMethods = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>,
+  getName() { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name; },
+  <span class="hljs-attr">created</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(),
+  <span class="hljs-attr">getValue</span>: <span class="hljs-literal">undefined</span> <span class="hljs-comment">// Will be ignored</span>
+};
+
+<span class="hljs-keyword">const</span> customJson = <span class="hljs-built_in">JSON</span>.stringify(userWithMethods, (key, value) =&gt; {
+  <span class="hljs-keyword">if</span> (key === <span class="hljs-string">'created'</span>) {
+    <span class="hljs-keyword">return</span> value.toISOString(); <span class="hljs-comment">// Convert Date to string</span>
+  }
+  <span class="hljs-keyword">return</span> value;
+});
+</div></code></pre>
+<h3 id="data-transformation-patterns">Data Transformation Patterns</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// API response transformation</span>
+<span class="hljs-keyword">const</span> apiResponse = {
+  <span class="hljs-attr">data</span>: [
+    { <span class="hljs-attr">user_id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Doe'</span>, <span class="hljs-attr">is_active</span>: <span class="hljs-literal">true</span> },
+    { <span class="hljs-attr">user_id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Smith'</span>, <span class="hljs-attr">is_active</span>: <span class="hljs-literal">false</span> }
+  ],
+  <span class="hljs-attr">meta</span>: { <span class="hljs-attr">total</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">page</span>: <span class="hljs-number">1</span> }
+};
+
+<span class="hljs-comment">// Transform to application format</span>
+<span class="hljs-keyword">const</span> transformedData = {
+  <span class="hljs-attr">users</span>: apiResponse.data.map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> ({
+    <span class="hljs-attr">id</span>: user.user_id,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">`<span class="hljs-subst">${user.first_name}</span> <span class="hljs-subst">${user.last_name}</span>`</span>,
+    <span class="hljs-attr">active</span>: user.is_active
+  })),
+  <span class="hljs-attr">pagination</span>: {
+    <span class="hljs-attr">total</span>: apiResponse.meta.total,
+    <span class="hljs-attr">currentPage</span>: apiResponse.meta.page
+  }
+};
+
+<span class="hljs-comment">// Deep cloning objects</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deepClone</span>(<span class="hljs-params">obj</span>) </span>{
+  <span class="hljs-keyword">if</span> (obj === <span class="hljs-literal">null</span> || <span class="hljs-keyword">typeof</span> obj !== <span class="hljs-string">'object'</span>) <span class="hljs-keyword">return</span> obj;
+  <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Date</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(obj);
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(obj)) <span class="hljs-keyword">return</span> obj.map(deepClone);
+  
+  <span class="hljs-keyword">const</span> cloned = {};
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> obj) {
+    <span class="hljs-keyword">if</span> (obj.hasOwnProperty(key)) {
+      cloned[key] = deepClone(obj[key]);
+    }
+  }
+  <span class="hljs-keyword">return</span> cloned;
+}
+
+<span class="hljs-comment">// Merging objects deeply</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deepMerge</span>(<span class="hljs-params">target, source</span>) </span>{
+  <span class="hljs-keyword">const</span> result = { ...target };
+  
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> source) {
+    <span class="hljs-keyword">if</span> (source.hasOwnProperty(key)) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> source[key] === <span class="hljs-string">'object'</span> &amp;&amp; !<span class="hljs-built_in">Array</span>.isArray(source[key])) {
+        result[key] = deepMerge(result[key] || {}, source[key]);
+      } <span class="hljs-keyword">else</span> {
+        result[key] = source[key];
+      }
+    }
+  }
+  
+  <span class="hljs-keyword">return</span> result;
+}
+</div></code></pre>
+<hr>
+<h2 id="event-handling-patterns">Event Handling Patterns</h2>
+<h3 id="dom-event-handling">DOM Event Handling</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Modern event handling</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ButtonHandler</span> </span>{
+  <span class="hljs-keyword">constructor</span>(buttonId) {
+    <span class="hljs-keyword">this</span>.button = <span class="hljs-built_in">document</span>.getElementById(buttonId);
+    <span class="hljs-keyword">this</span>.clickCount = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>.setupEventListeners();
+  }
+
+  <span class="hljs-comment">// Arrow function to preserve 'this' context</span>
+  handleClick = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+    <span class="hljs-keyword">this</span>.clickCount++;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Button clicked <span class="hljs-subst">${<span class="hljs-keyword">this</span>.clickCount}</span> times`</span>);
+    
+    <span class="hljs-comment">// Event object properties</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Event type:'</span>, event.type);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Target element:'</span>, event.target);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Current target:'</span>, event.currentTarget);
+  }
+
+  handleMouseOver = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+    event.target.style.backgroundColor = <span class="hljs-string">'lightblue'</span>;
+  }
+
+  handleMouseOut = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+    event.target.style.backgroundColor = <span class="hljs-string">''</span>;
+  }
+
+  setupEventListeners() {
+    <span class="hljs-keyword">this</span>.button.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">this</span>.handleClick);
+    <span class="hljs-keyword">this</span>.button.addEventListener(<span class="hljs-string">'mouseover'</span>, <span class="hljs-keyword">this</span>.handleMouseOver);
+    <span class="hljs-keyword">this</span>.button.addEventListener(<span class="hljs-string">'mouseout'</span>, <span class="hljs-keyword">this</span>.handleMouseOut);
+  }
+
+  destroy() {
+    <span class="hljs-comment">// Clean up event listeners</span>
+    <span class="hljs-keyword">this</span>.button.removeEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">this</span>.handleClick);
+    <span class="hljs-keyword">this</span>.button.removeEventListener(<span class="hljs-string">'mouseover'</span>, <span class="hljs-keyword">this</span>.handleMouseOver);
+    <span class="hljs-keyword">this</span>.button.removeEventListener(<span class="hljs-string">'mouseout'</span>, <span class="hljs-keyword">this</span>.handleMouseOut);
+  }
+}
+</div></code></pre>
+<h3 id="custom-event-system">Custom Event System</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Simple event emitter</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.events = {};
+  }
+
+  on(eventName, callback) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.events[eventName]) {
+      <span class="hljs-keyword">this</span>.events[eventName] = [];
+    }
+    <span class="hljs-keyword">this</span>.events[eventName].push(callback);
+  }
+
+  emit(eventName, data) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.events[eventName]) {
+      <span class="hljs-keyword">this</span>.events[eventName].forEach(<span class="hljs-function"><span class="hljs-params">callback</span> =&gt;</span> callback(data));
+    }
+  }
+
+  off(eventName, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.events[eventName]) {
+      <span class="hljs-keyword">this</span>.events[eventName] = <span class="hljs-keyword">this</span>.events[eventName].filter(<span class="hljs-function"><span class="hljs-params">cb</span> =&gt;</span> cb !== callback);
+    }
+  }
+}
+
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">const</span> emitter = <span class="hljs-keyword">new</span> EventEmitter();
+
+<span class="hljs-keyword">const</span> userLoginHandler = <span class="hljs-function">(<span class="hljs-params">userData</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User logged in:'</span>, userData.name);
+};
+
+emitter.on(<span class="hljs-string">'userLogin'</span>, userLoginHandler);
+emitter.emit(<span class="hljs-string">'userLogin'</span>, { <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">123</span> });
+</div></code></pre>
+<hr>
+<h2 id="quick-reference-angular-specific-patterns">Quick Reference: Angular-Specific Patterns</h2>
+<h3 id="service-pattern">Service Pattern</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// This is how you'll structure services in Angular</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.apiUrl = <span class="hljs-string">'https://api.example.com'</span>;
+    <span class="hljs-keyword">this</span>.users = [];
+  }
+
+  <span class="hljs-keyword">async</span> getUsers() {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.apiUrl}</span>/users`</span>);
+      <span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> response.json();
+      <span class="hljs-keyword">this</span>.users = users;
+      <span class="hljs-keyword">return</span> users;
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error fetching users:'</span>, error);
+      <span class="hljs-keyword">throw</span> error;
+    }
+  }
+
+  <span class="hljs-keyword">async</span> createUser(userData) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.apiUrl}</span>/users`</span>, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+        <span class="hljs-attr">headers</span>: { <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> },
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(userData)
+      });
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> response.json();
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error creating user:'</span>, error);
+      <span class="hljs-keyword">throw</span> error;
+    }
+  }
+
+  getUserById(id) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === id);
+  }
+
+  filterUsers(predicate) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.users.filter(predicate);
+  }
+}
+</div></code></pre>
+<h3 id="component-like-pattern">Component-Like Pattern</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">constructor</span>(elementId) {
+    <span class="hljs-keyword">this</span>.element = <span class="hljs-built_in">document</span>.getElementById(elementId);
+    <span class="hljs-keyword">this</span>.state = {
+      <span class="hljs-attr">users</span>: [],
+      <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-literal">null</span>
+    };
+    <span class="hljs-keyword">this</span>.userService = <span class="hljs-keyword">new</span> UserService();
+    <span class="hljs-keyword">this</span>.init();
+  }
+
+  <span class="hljs-comment">// Lifecycle-like method</span>
+  <span class="hljs-keyword">async</span> init() {
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.loadUsers();
+    <span class="hljs-keyword">this</span>.render();
+    <span class="hljs-keyword">this</span>.setupEventListeners();
+  }
+
+  <span class="hljs-comment">// State management</span>
+  setState(newState) {
+    <span class="hljs-keyword">this</span>.state = { ...this.state, ...newState };
+    <span class="hljs-keyword">this</span>.render();
+  }
+
+  <span class="hljs-comment">// Data loading</span>
+  <span class="hljs-keyword">async</span> loadUsers() {
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">loading</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">error</span>: <span class="hljs-literal">null</span> });
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.userService.getUsers();
+      <span class="hljs-keyword">this</span>.setState({ users, <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span> });
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">error</span>: error.message, <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span> });
+    }
+  }
+
+  <span class="hljs-comment">// Event handlers with arrow functions</span>
+  handleUserClick = <span class="hljs-function">(<span class="hljs-params">userId</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">this</span>.userService.getUserById(userId);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Selected user:'</span>, user);
+  }
+
+  <span class="hljs-comment">// Rendering method</span>
+  render() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.loading) {
+      <span class="hljs-keyword">this</span>.element.innerHTML = <span class="hljs-string">'&lt;div&gt;Loading...&lt;/div&gt;'</span>;
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.error) {
+      <span class="hljs-keyword">this</span>.element.innerHTML = <span class="hljs-string">`&lt;div&gt;Error: <span class="hljs-subst">${<span class="hljs-keyword">this</span>.state.error}</span>&lt;/div&gt;`</span>;
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> usersHtml = <span class="hljs-keyword">this</span>.state.users
+      .map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> <span class="hljs-string">`
+        &lt;div class="user-card" data-user-id="<span class="hljs-subst">${user.id}</span>"&gt;
+          &lt;h3&gt;<span class="hljs-subst">${user.name}</span>&lt;/h3&gt;
+          &lt;p&gt;<span class="hljs-subst">${user.email}</span>&lt;/p&gt;
+        &lt;/div&gt;
+      `</span>)
+      .join(<span class="hljs-string">''</span>);
+
+    <span class="hljs-keyword">this</span>.element.innerHTML = <span class="hljs-string">`
+      &lt;div class="users-container"&gt;
+        &lt;h2&gt;Users (<span class="hljs-subst">${<span class="hljs-keyword">this</span>.state.users.length}</span>)&lt;/h2&gt;
+        <span class="hljs-subst">${usersHtml}</span>
+      &lt;/div&gt;
+    `</span>;
+  }
+
+  setupEventListeners() {
+    <span class="hljs-keyword">this</span>.element.addEventListener(<span class="hljs-string">'click'</span>, (event) =&gt; {
+      <span class="hljs-keyword">const</span> userCard = event.target.closest(<span class="hljs-string">'.user-card'</span>);
+      <span class="hljs-keyword">if</span> (userCard) {
+        <span class="hljs-keyword">const</span> userId = <span class="hljs-built_in">parseInt</span>(userCard.dataset.userId);
+        <span class="hljs-keyword">this</span>.handleUserClick(userId);
+      }
+    });
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="practice-exercises">Practice Exercises</h2>
+<h3 id="exercise-1-data-processing">Exercise 1: Data Processing</h3>
+<p>Create a function that processes an array of users and returns analytics:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> users = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'John'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span>, <span class="hljs-attr">department</span>: <span class="hljs-string">'IT'</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">50000</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>, <span class="hljs-attr">department</span>: <span class="hljs-string">'HR'</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">55000</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Bob'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">35</span>, <span class="hljs-attr">department</span>: <span class="hljs-string">'IT'</span>, <span class="hljs-attr">salary</span>: <span class="hljs-number">60000</span>, <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span> },
+  <span class="hljs-comment">// ... more users</span>
+];
+
+<span class="hljs-comment">// Create function that returns:</span>
+<span class="hljs-comment">// - Total active users</span>
+<span class="hljs-comment">// - Average salary by department</span>
+<span class="hljs-comment">// - Youngest and oldest users</span>
+<span class="hljs-comment">// - Users grouped by department</span>
+</div></code></pre>
+<h3 id="exercise-2-async-data-fetching">Exercise 2: Async Data Fetching</h3>
+<p>Create a class that manages API calls with caching:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApiManager</span> </span>{
+  <span class="hljs-keyword">constructor</span>(baseUrl) {
+    <span class="hljs-comment">// Implement constructor</span>
+  }
+
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">get</span>(endpoint) {
+    <span class="hljs-comment">// Implement GET with caching</span>
+  }
+
+  <span class="hljs-keyword">async</span> post(endpoint, data) {
+    <span class="hljs-comment">// Implement POST</span>
+  }
+
+  clearCache() {
+    <span class="hljs-comment">// Implement cache clearing</span>
+  }
+}
+</div></code></pre>
+<h3 id="exercise-3-event-driven-component">Exercise 3: Event-Driven Component</h3>
+<p>Create a component that handles form validation and submission:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormComponent</span> </span>{
+  <span class="hljs-keyword">constructor</span>(formId) {
+    <span class="hljs-comment">// Implement form handling with:</span>
+    <span class="hljs-comment">// - Real-time validation</span>
+    <span class="hljs-comment">// - Error display</span>
+    <span class="hljs-comment">// - Submit handling</span>
+    <span class="hljs-comment">// - Loading states</span>
+  }
+
+  validateField(fieldName, value) {
+    <span class="hljs-comment">// Implement field validation</span>
+  }
+
+  <span class="hljs-keyword">async</span> submitForm(formData) {
+    <span class="hljs-comment">// Implement form submission</span>
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="next-steps-to-typescript--angular">Next Steps to TypeScript &amp; Angular</h2>
+<p>After mastering these JavaScript concepts, you'll be ready for:</p>
+<h3 id="typescript-additions">TypeScript Additions</h3>
+<ul>
+<li><strong>Type annotations</strong>: <code>const name: string = 'John'</code></li>
+<li><strong>Interfaces</strong>: <code>interface User { name: string; age: number; }</code></li>
+<li><strong>Generics</strong>: <code>Array&lt;User&gt;</code>, <code>Promise&lt;ApiResponse&gt;</code></li>
+<li><strong>Decorators</strong>: <code>@Component</code>, <code>@Injectable</code></li>
+</ul>
+<h3 id="angular-concepts">Angular Concepts</h3>
+<ul>
+<li><strong>Components</strong>: Use classes with decorators</li>
+<li><strong>Services</strong>: Dependency injection with classes</li>
+<li><strong>Observables</strong>: Advanced async patterns (RxJS)</li>
+<li><strong>Templates</strong>: HTML with data binding</li>
+<li><strong>Modules</strong>: Organization and lazy loading</li>
+</ul>
+<h3 id="key-connections">Key Connections</h3>
+<p><strong>JavaScript → TypeScript:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// JavaScript</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> </span>{
+  getUsers() {
+    <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">'/api/users'</span>).then(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.json());
+  }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// TypeScript</span>
+<span class="hljs-keyword">interface</span> User {
+  id: <span class="hljs-built_in">number</span>;
+  name: <span class="hljs-built_in">string</span>;
+  email: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">class</span> UserService {
+  getUsers(): <span class="hljs-built_in">Promise</span>&lt;User[]&gt; {
+    <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">'/api/users'</span>).then(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.json());
+  }
+}
+</div></code></pre>
+<p><strong>JavaScript → Angular:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// JavaScript Class</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.users = [];
+  }
+  
+  loadUsers = <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">this</span>.users = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.userService.getUsers();
+  }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// Angular Component</span>
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">'app-users'</span>,
+  template: <span class="hljs-string">`&lt;div *ngFor="let user of users"&gt;{{user.name}}&lt;/div&gt;`</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UsersComponent {
+  users: User[] = [];
+  
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> userService: UserService</span>) {}
+  
+  <span class="hljs-keyword">async</span> ngOnInit() {
+    <span class="hljs-keyword">this</span>.users = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.userService.getUsers();
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="final-checklist">Final Checklist</h2>
+<p>Before moving to TypeScript and Angular, ensure you can:</p>
+<p>✅ <strong>ES6 Modules</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">Write and use named exports/imports</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">Create barrel exports (index files)</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">Understand dynamic imports for lazy loading</label></li>
+</ul>
+<p>✅ <strong>Classes &amp; OOP</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">Create classes with constructors, methods, and properties</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Use inheritance with </label><code>extends</code> and <code>super</code></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">Implement getters and setters</label></li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">Understand </label><code>this</code> context in different scenarios</li>
+</ul>
+<p>✅ <strong>Functions</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">Write arrow functions and understand </label><code>this</code> binding</li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">Use higher-order functions (functions that take/return functions)</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Apply array methods (</label><code>map</code>, <code>filter</code>, <code>reduce</code>, etc.)</li>
+</ul>
+<p>✅ <strong>Async Programming</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">Work with Promises using </label><code>.then()</code> and <code>.catch()</code></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">Use </label><code>async/await</code> syntax comfortably</li>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12">Handle errors in async operations</label></li>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13">Use </label><code>Promise.all()</code> for concurrent operations</li>
+</ul>
+<p>✅ <strong>Modern Syntax</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14">Destructure objects and arrays</label></li>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15">Use spread/rest operators effectively</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16">Work with template literals</label></li>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17">Understand </label><code>let</code>, <code>const</code>, and block scope</li>
+</ul>
+<p>✅ <strong>Data Handling</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18">Transform data using array methods</label></li>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19">Work with JSON serialization/parsing</label></li>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20">Handle API responses and errors</label></li>
+<li><input type="checkbox" id="checkbox21"><label for="checkbox21">Implement basic state management patterns</label></li>
+</ul>
+<p>✅ <strong>Error Handling</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox22"><label for="checkbox22">Use try-catch-finally blocks</label></li>
+<li><input type="checkbox" id="checkbox23"><label for="checkbox23">Create and throw custom errors</label></li>
+<li><input type="checkbox" id="checkbox24"><label for="checkbox24">Handle both sync and async errors</label></li>
+</ul>
+<p>Once you're comfortable with these concepts, you'll find TypeScript adds type safety to these patterns, and Angular provides a structured framework that uses all of these JavaScript fundamentals extensively.</p>
+<hr>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><strong>MDN Web Docs</strong>: Comprehensive JavaScript reference</li>
+<li><strong>JavaScript.info</strong>: Modern JavaScript tutorial</li>
+<li><strong>Eloquent JavaScript</strong>: Free online book</li>
+<li><strong>You Don't Know JS</strong>: Deep dive into JavaScript concepts</li>
+</ul>
+<p>Remember: Angular is built on these JavaScript foundations. The better you understand these concepts, the easier Angular will be to learn!</p>
+
+</body>
+</html>
