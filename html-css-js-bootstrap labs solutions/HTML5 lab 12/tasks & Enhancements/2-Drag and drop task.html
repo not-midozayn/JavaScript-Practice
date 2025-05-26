@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function changeVideo(value) {
+            var videoElement = document.getElementById('myvideo');
+            videoElement.src = value;
+            videoElement.play();
+        }
+    </script>
+    <style>
+        .container {
+            width: 80vw;
+            height: 80vh;
+            border: 5px solid black;
+            border-radius: 20px;
+            margin: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .top {
+            width: 97%;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            overflow-y: auto;
+            height: 100%;
+            border: 5px solid black;
+            background-color: orange;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+        }
+
+        .top img {
+            padding: 5px;
+            height: 80%;
+            width: 17%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: inherit;
+        }
+
+        .bot {
+            width: 97%;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            overflow-y: auto;
+            height: 100%;
+            border: 5px solid black;
+            background-color: orange;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+        }
+
+        .bot img {
+            padding: 5px;
+            height: 80%;
+            width: 17%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <section class="top" id="top">
+            <img src="./images/1.jpg">
+            <img src="./images/2.jpg">
+            <img src="./images/3.jpg">
+            <img src="./images/4.jpg">
+            <img src="./images/5.jpg">
+            <img src="./images/6.jpg">
+            <img src="./images/7.jpg">
+            <img src="./images/8.jpg">
+        </section>
+        <section class="bot" id="bot">
+        </section>
+    </div>
+</body>
+<script>
+
+    let imgCount = (document.querySelectorAll('#top img').length);
+    window.addEventListener('load', function () {
+        // bot : drop,dragover,dragenter
+        bot = document.getElementById('bot');
+        bot.addEventListener('drop', dropped);
+        bot.addEventListener('dragenter', enterdrag);
+        bot.addEventListener('dragover', overdrag);
+        // top:dragleave
+        top = document.getElementById('top');
+        top.addEventListener('dragleave', leavedrag);
+        // images:dragstart , dragend
+        allimg = document.images;
+        for (let i = 0; i < allimg.length; i++) {
+            allimg[i].addEventListener('dragstart', startdrag);
+            allimg[i].addEventListener('dragend', enddrag);
+        }
+    });//end of load
+    function startdrag(e) {
+        // console.log(e);
+        //console.log(e.target.outerHTML);
+        // e.preventDefault();
+        e.dataTransfer.setData("myimg", e.target.outerHTML);
+    }
+    function enddrag(e) {
+        e.preventDefault();
+        e.target.style.display = "none";
+    }
+    function dropped(e) {
+        e.preventDefault();
+        bot.innerHTML += e.dataTransfer.getData("myimg");
+        imgCount--;
+        if (imgCount <= 0) {
+            document.getElementById("top").innerHTML = `<div>No More Photos</div>`;
+            
+        }
+    }
+    function overdrag(e) {
+        e.preventDefault();
+    }
+    function leavedrag(e) {
+        e.preventDefault();
+    }
+    function enterdrag(e) {
+        e.preventDefault();
+        bot.style.backgroundColor = "yellow";
+    }
+</script>
+
+
+</html>
