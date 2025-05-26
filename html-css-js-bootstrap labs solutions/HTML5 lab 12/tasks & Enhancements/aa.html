@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated eCommerce Sales Charts with D3.js</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .chart-container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .chart-title {
+            margin: 10px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        svg {
+            background-color: #f9fafc;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>eCommerce Sales Data Visualization with D3.js</h1>
+
+    <div class="chart-container">
+        <div class="chart-title">Monthly Sales Bar Chart</div>
+        <svg id="barChart" width="600" height="400"></svg>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-title">Weekly Sales Line Chart</div>
+        <svg id="lineChart" width="600" height="400"></svg>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-title">Product Category Sales Pie Chart</div>
+        <svg id="pieChart" width="400" height="400"></svg>
+    </div>
+
+    <script>
+        // Bar Chart (Monthly Sales)
+        const barData = [
+            { month: 'Jan', sales: 120 },
+            { month: 'Feb', sales: 150 },
+            { month: 'Mar', sales: 180 },
+            { month: 'Apr', sales: 130 },
+            { month: 'May', sales: 170 },
+            { month: 'Jun', sales: 200 }
+        ];
+
+        const barSvg = d3.select('#barChart');
+        const barWidth = 600;
+        const barHeight = 400;
+        const xScale = d3.scaleBand().domain(barData.map(d => d.month)).range([0, barWidth]).padding(0.2);
+        const yScale = d3.scaleLinear().domain([0, d3.max(barData, d => d.sales)]).nice().range([barHeight, 0]);
+
+        barSvg.selectAll('rect')
+            .data(barData)
+            .enter().append('rect')
+            .attr('x', d => xScale(d.month))
+            .attr('y', barHeight)
+            .attr('width', xScale.bandwidth())
+            .attr('height', 0)
+            .attr('fill', '#4caf50')
+            .transition()
+            .duration(1000)
+            .attr('y', d => yScale(d.sales))
+            .attr('height', d => barHeight - yScale(d.sales));
+
+        // Line Chart (Weekly Sales)
+        const lineData = [50, 70, 90, 65, 85, 100, 120];
+        const lineSvg = d3.select('#lineChart');
+        const lineX = d3.scaleLinear().domain([0, lineData.length - 1]).range([0, 600]);
+        const lineY = d3.scaleLinear().domain([0, d3.max(lineData)]).range([400, 0]);
+
+        const line = d3.line()
+            .x((d, i) => lineX(i))
+            .y(d => lineY(d))
+            .curve(d3.curveMonotoneX);
+
+        lineSvg.append('path')
+            .datum(lineData)
+            .attr('fill', 'none')
+            .attr('stroke', '#2196f3')
+            .attr('stroke-width', 2)
+            .attr('d', line)
+            .attr('stroke-dasharray', function() { return this.getTotalLength(); })
+            .attr('stroke-dashoffset', function() { return this.getTotalLength(); })
+            .transition()
+            .duration(1500)
+            .attr('stroke-dashoffset', 0);
+
+        // Pie Chart (Product Category Sales)
+        const pieData = [
+            { category: 'Electronics', value: 45 },
+            { category: 'Clothing', value: 25 },
+            { category: 'Home', value: 15 },
+            { category: 'Sports', value: 15 }
+        ];
+
+        const pieSvg = d3.select('#pieChart').append('g')
+            .attr('transform', 'translate(200,200)');
+
+        const pie = d3.pie().value(d => d.value);
+        const arc = d3.arc().innerRadius(0).outerRadius(150);
+
+        pieSvg.selectAll('path')
+            .data(pie(pieData))
+            .enter().append('path')
+            .attr('d', arc)
+            .attr('fill', (d, i) => d3.schemeCategory10[i])
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .each(function(d) { this._current = d; })
+            .transition()
+            .duration(1000)
+            .attrTween('d', function(d) {
+                const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
+                return function(t) { return arc(interpolate(t)); };
+            });
+    </script>
+</body>
+</html>
