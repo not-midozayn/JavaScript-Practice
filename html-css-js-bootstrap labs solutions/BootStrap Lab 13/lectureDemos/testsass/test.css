@@ -1,0 +1,412 @@
+/* line 64, ../sass/test.scss */
+.container-fluid {
+  width: 100% !important;
+}
+
+/* line 97, ../sass/test.scss */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* line 70, ../sass/test.scss */
+.container {
+  width: 100% !important;
+}
+
+@media all and (min-width: 0px) {
+  /* line 77, ../sass/test.scss */
+  .col-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-3 {
+    width: 25%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-6 {
+    width: 50%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-9 {
+    width: 75%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 77, ../sass/test.scss */
+  .col-12 {
+    width: 100%;
+  }
+}
+@media all and (min-width: 576px) {
+  /* line 85, ../sass/test.scss */
+  .container {
+    width: 90% !important;
+    margin: 5px auto;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-3 {
+    width: 25%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-6 {
+    width: 50%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-9 {
+    width: 75%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-sm-12 {
+    width: 100%;
+  }
+}
+@media all and (min-width: 768px) {
+  /* line 85, ../sass/test.scss */
+  .container {
+    width: 90% !important;
+    margin: 5px auto;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-3 {
+    width: 25%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-6 {
+    width: 50%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-9 {
+    width: 75%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-md-12 {
+    width: 100%;
+  }
+}
+@media all and (min-width: 992px) {
+  /* line 85, ../sass/test.scss */
+  .container {
+    width: 90% !important;
+    margin: 5px auto;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-3 {
+    width: 25%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-6 {
+    width: 50%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-9 {
+    width: 75%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-lg-12 {
+    width: 100%;
+  }
+}
+@media all and (min-width: 1200px) {
+  /* line 85, ../sass/test.scss */
+  .container {
+    width: 90% !important;
+    margin: 5px auto;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-3 {
+    width: 25%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-6 {
+    width: 50%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-9 {
+    width: 75%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xl-12 {
+    width: 100%;
+  }
+}
+@media all and (min-width: 1400px) {
+  /* line 85, ../sass/test.scss */
+  .container {
+    width: 90% !important;
+    margin: 5px auto;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-1 {
+    width: 8.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-2 {
+    width: 16.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-3 {
+    width: 25%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-4 {
+    width: 33.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-5 {
+    width: 41.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-6 {
+    width: 50%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-7 {
+    width: 58.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-8 {
+    width: 66.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-9 {
+    width: 75%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-10 {
+    width: 83.3333333333%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-11 {
+    width: 91.6666666667%;
+  }
+
+  /* line 90, ../sass/test.scss */
+  .col-xxl-12 {
+    width: 100%;
+  }
+}
